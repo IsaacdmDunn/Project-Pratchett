@@ -12,6 +12,7 @@ public class InventoryStorage : MonoBehaviour
     }
 
     public bool inventoryUpdateRequired = false;
+    [SerializeField]public InventoryStorage otherInventory = null;
 
     public void Start()
     {
@@ -43,6 +44,26 @@ public class InventoryStorage : MonoBehaviour
         }
         
 
+    }
+
+    public void MoveItem(int slotID, int amount)
+    {
+        inventoryUpdateRequired = true;
+        slots[slotID].amount -= 1;
+        otherInventory.AddItem(slots[slotID].itemType, 1);
+        if (slots[slotID].amount == 0)
+        {
+            
+            slots.RemoveAt(slotID);
+        }
+    }
+
+    public void MoveStack(int slotID)
+    {
+        inventoryUpdateRequired = true;
+        otherInventory.AddItem(slots[slotID].itemType, slots[slotID].amount);
+        slots[slotID].amount = 0;
+        slots.RemoveAt(slotID);
     }
 
     public List<Slot> slots;

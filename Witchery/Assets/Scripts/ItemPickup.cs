@@ -8,6 +8,7 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] public ItemType item;
     [SerializeField] Material foragedMAT;
     bool foragable = true;
+    [SerializeField] int amount = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class ItemPickup : MonoBehaviour
 
             if (foragable && Input.GetKey(KeyCode.E))
             {
-                inventory.AddItem(item, 1);
+                inventory.AddItem(item, amount);
                 foragable = false;
                 gameObject.GetComponent<MeshRenderer>().material = foragedMAT;
                 //slot = new InventoryStorage.Slot();
