@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CauldrenMixture : MonoBehaviour
 {
-    [SerializeField] List<ItemIngredient> mixture;
+    [SerializeField] public List<ItemIngredient> mixture;
     public List<int> itemIngredientIDs = new List<int>();
     public List<float> volume = new List<float>();
     [SerializeField] float totalVolume = 0f;
@@ -13,6 +13,8 @@ public class CauldrenMixture : MonoBehaviour
     float temperature =0;
     [SerializeField] float mixRate =0.01f;
     public Color liquidColor = new Color(255, 255, 255, 255);
+
+    public bool updateUIRequired = false;
 
     public void Start()
     {
@@ -40,13 +42,27 @@ public class CauldrenMixture : MonoBehaviour
 
     public void AddIngredient(ItemIngredient itemToAdd)
     {
-        mixture.Add(itemToAdd);
-        foreach (ItemIngredient ingredient in mixture)
+        
+        if (itemIngredientIDs.Contains( itemToAdd.id))
         {
-            itemIngredientIDs.Add(ingredient.id);
-            volume.Add(1f);
-            totalVolume += 1f;
+           
+            for (int ingredientID= 0; ingredientID < mixture.Count; ingredientID++) 
+            {
+                if (mixture[ingredientID].id == itemToAdd.id)
+                {
+                    volume[itemToAdd.id] += 1f;
+                }
+            }
         }
+        else
+        {
+            mixture.Add(itemToAdd);
+            itemIngredientIDs.Add(itemToAdd.id);
+            volume.Add(1f);
+        }
+        
+        totalVolume += 1f;
+        updateUIRequired = true;
     }
 
     //removes ingredients when volume is too low
@@ -55,11 +71,12 @@ public class CauldrenMixture : MonoBehaviour
 
         for (int mixtureCounter = 0; mixtureCounter < mixture.Count; mixtureCounter++)
         {
-            if (volume[mixtureCounter] < 0.00001f)
+            if (volume[mixtureCounter] < mixRate)
             {
                 volume.RemoveAt(mixtureCounter);
                 itemIngredientIDs.Remove(mixture[mixtureCounter].id);
                 mixture.RemoveAt(mixtureCounter);
+                updateUIRequired = true;
             }
         }
     }
@@ -76,13 +93,15 @@ public class CauldrenMixture : MonoBehaviour
             
             if (recipe.CheckIngredients(itemIngredientIDs))
             {
-                Debug.Log(itemIngredientIDs.Count);
+                updateUIRequired = true;
+
                 //if mixture does not already contain output ingredient
                 if (!mixture.Contains(recipe.outputIngredient))
                 {
                     mixture.Add(recipe.outputIngredient);
                     itemIngredientIDs.Add(recipe.outputIngredient.id);
                     volume.Add(mixRate * recipe.ingredentIDs.Count);
+                    
                 }
 
                 for (int mixtureCounter = 0; mixtureCounter < mixture.Count; mixtureCounter++)

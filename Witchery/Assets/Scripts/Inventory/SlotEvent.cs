@@ -13,17 +13,19 @@ public class SlotEvent : MonoBehaviour
 
     public void Click()
     {
-        if (id < gameObject.transform.parent.GetComponentInParent<InventoryUI>().inv.slots.Count)
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (id < gameObject.transform.parent.GetComponentInParent<InventoryUI>().inv.slots.Count)
             {
-                gameObject.transform.parent.GetComponentInParent<InventoryUI>().inv.MoveStack(id);
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    gameObject.transform.parent.GetComponentInParent<InventoryUI>().inv.MoveStack(id);
+                }
+                else
+                {
+                    gameObject.transform.parent.GetComponentInParent<InventoryUI>().inv.MoveItem(id, 1);
+                }
             }
-            else
-            {
-                gameObject.transform.parent.GetComponentInParent<InventoryUI>().inv.MoveItem(id, 1);
-            }
-        }
+        
+        
     }
 }
 

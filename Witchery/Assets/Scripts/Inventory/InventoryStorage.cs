@@ -68,4 +68,6 @@ public class InventoryStorage : MonoBehaviour
 
     public List<Slot> slots;
     [SerializeField] int slotLimit;
+
+    
 }

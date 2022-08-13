@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cauldren : MonoBehaviour
 {
 
-    [SerializeField] CauldrenMixture cauldrenMixture;
+    [SerializeField] public CauldrenMixture cauldrenMixture;
     [SerializeField] Material liquid;
     public bool flameOn = false;
     bool isStirring = false;
@@ -29,5 +29,16 @@ public class Cauldren : MonoBehaviour
         }
 
         liquid.color = cauldrenMixture.liquidColor;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                //open potion menu
+            }
+        }   
     }
 }
