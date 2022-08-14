@@ -8,6 +8,7 @@ public class CauldronUI : InventoryUI
     
     [SerializeField] Cauldren cauldron;
     [SerializeField] int cauldrenDisplayLimit =10;
+    public bool isEmptying = false;
     /// <summary>
     /// TODO make big inventory with optimised for size and scrolling
     /// </summary>
@@ -84,5 +85,17 @@ public class CauldronUI : InventoryUI
 
         }
 
+        if (isEmptying)
+        {
+            for (int ingredientVolume = 0; ingredientVolume < cauldron.cauldrenMixture.volume.Count; ingredientVolume++)
+            {
+                cauldron.cauldrenMixture.volume[ingredientVolume] -= (0.01f  * cauldron.cauldrenMixture.volume[ingredientVolume]);
+            }
+        }
+    }
+
+    public void EmptyCauldron() 
+    {
+        isEmptying = !isEmptying;
     }
 }

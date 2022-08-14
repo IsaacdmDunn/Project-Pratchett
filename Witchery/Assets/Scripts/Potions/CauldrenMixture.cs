@@ -7,7 +7,7 @@ public class CauldrenMixture : MonoBehaviour
     [SerializeField] public List<ItemIngredient> mixture;
     public List<int> itemIngredientIDs = new List<int>();
     public List<float> volume = new List<float>();
-    [SerializeField] float totalVolume = 0f;
+    [SerializeField] public float totalVolume = 0f;
     [SerializeField] Cauldren cauldren;
     public List<Recipe> recipes = new List<Recipe>();
     float temperature =0;
@@ -50,7 +50,7 @@ public class CauldrenMixture : MonoBehaviour
             {
                 if (mixture[ingredientID].id == itemToAdd.id)
                 {
-                    volume[itemToAdd.id] += 1f;
+                    volume[ingredientID] += 1f;
                 }
             }
         }
