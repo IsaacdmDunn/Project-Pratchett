@@ -16,6 +16,19 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField] protected int sizeX = 5;
     [SerializeField] protected int sizeY = 4;
+
+    protected void CheckItemType(int slotID)
+    {
+        if (inv.slots[slotID].itemType.GetType() == typeof(ItemPotion))
+        {
+            ItemPotion tempPotion = (ItemPotion)inv.slots[slotID].itemType;
+            iconIMG[slotID].color = new Color (tempPotion.potionColour.r, tempPotion.potionColour.g, tempPotion.potionColour.b, 1f);
+        }
+        else
+        {
+            iconIMG[slotID].color = new Color(1f, 1f, 1f, 1f);
+        }
+    }
     
 
     ////updates inventory UI when item is picked up

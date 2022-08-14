@@ -35,9 +35,9 @@ public class Cauldren : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.C))
             {
-                //open potion menu
+                
             }
         }   
     }

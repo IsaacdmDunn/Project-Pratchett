@@ -9,6 +9,7 @@ public class CauldronUI : InventoryUI
     [SerializeField] Cauldren cauldron;
     [SerializeField] int cauldrenDisplayLimit =10;
     public bool isEmptying = false;
+    [SerializeField] Sprite potionBottleSprite;
     /// <summary>
     /// TODO make big inventory with optimised for size and scrolling
     /// </summary>
@@ -73,6 +74,10 @@ public class CauldronUI : InventoryUI
             inventoryUI.SetActive(!inventoryUI.activeSelf);
             inventoryUITitleTxt.SetActive(!inventoryUITitleTxt.activeSelf);
         }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            MakePotion();
+        }
 
         if (inv.slots.Count>0)
         {
@@ -97,5 +102,22 @@ public class CauldronUI : InventoryUI
     public void EmptyCauldron() 
     {
         isEmptying = !isEmptying;
+    }
+
+    public void MakePotion()
+    {
+        for (int ingredientVolume = 0; ingredientVolume < cauldron.cauldrenMixture.volume.Count; ingredientVolume++)
+        {
+            cauldron.cauldrenMixture.volume[ingredientVolume] -= (1f * cauldron.cauldrenMixture.volume[ingredientVolume] / cauldron.cauldrenMixture.volume.Count);
+        }
+        ItemPotion potionToMake = new ItemPotion();
+        potionToMake.displayName = "New Potion";
+        potionToMake.description = "make system to show effects";
+        potionToMake.potionColour = cauldron.cauldrenMixture.liquidColor;
+        potionToMake.volumes = cauldron.cauldrenMixture.volume;
+        potionToMake.ingredientEffects = cauldron.cauldrenMixture.mixture;
+        potionToMake.icon = potionBottleSprite;
+
+        inv.AddItem(potionToMake, 1);
     }
 }

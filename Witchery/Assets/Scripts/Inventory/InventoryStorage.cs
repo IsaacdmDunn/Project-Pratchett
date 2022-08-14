@@ -16,10 +16,7 @@ public class InventoryStorage : MonoBehaviour
 
     public void Start()
     {
-        //for (int i = 0; i < slotLimit; i++)
-        //{
-        //    slots.Add(null);
-        //}
+        
     }
 
     public void AddItem(ItemType itemToAdd, int amount)

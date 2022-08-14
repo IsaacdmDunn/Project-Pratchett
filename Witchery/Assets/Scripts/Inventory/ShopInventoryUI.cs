@@ -46,6 +46,7 @@ public class ShopInventoryUI : InventoryUI
                 {
                     itemTxt[slotID].text = inv.slots[slotID].amount.ToString();
                     iconIMG[slotID].sprite = inv.slots[slotID].itemType.icon;
+                    CheckItemType(slotID);
                 }
 
                 itemTxt[inv.slots.Count].text = null;
