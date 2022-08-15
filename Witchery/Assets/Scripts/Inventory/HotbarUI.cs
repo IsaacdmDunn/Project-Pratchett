@@ -9,26 +9,7 @@ public class HotbarUI : InventoryUI
 
     private void Start()
     {
-        int slotID;
-        for (int x = 0; x < sizeX; x++)
-        {
-            for (int y = 0; y < sizeY; y++)
-            {
-                slotID = (x * sizeY) + y;
-                GameObject slotGO = Instantiate(SlotPrefab);
-                slotGO.transform.SetParent(inventoryUI.gameObject.transform);
-                slotGO.name = "inventorySlot " + (slotID).ToString();
-                slotGO.GetComponent<SlotEvent>().id = slotID;
-                itemTxt.Add(slotGO.GetComponentInChildren<Text>());
-                iconIMG.Add(slotGO.GetComponentInChildren<Image>());
-                if (slotID < inv.slots.Count)
-                {
-                    itemTxt[slotID].text = inv.slots[slotID].amount.ToString();
-                    iconIMG[slotID].sprite = inv.slots[slotID].itemType.icon;
-                }
-
-            }
-        }
+        GenerateSlots();
     }
     //updates inventory UI when item is picked up
     //TODO make it change a specific slot for efficientcy
@@ -56,11 +37,36 @@ public class HotbarUI : InventoryUI
 
     public void Update()
     {
-
+        //if update is required
         if (inv.inventoryUpdateRequired)
         {
             UpdateInventory();
         }
 
     }
+    //generates slots based on slot limit
+    void GenerateSlots()
+    {
+        int slotID;
+        for (int x = 0; x < sizeX; x++)
+        {
+            for (int y = 0; y < sizeY; y++)
+            {
+                slotID = (x * sizeY) + y;
+                GameObject slotGO = Instantiate(SlotPrefab);
+                slotGO.transform.SetParent(inventoryUI.gameObject.transform);
+                slotGO.name = "inventorySlot " + (slotID).ToString();
+                slotGO.GetComponent<SlotEvent>().id = slotID;
+                itemTxt.Add(slotGO.GetComponentInChildren<Text>());
+                iconIMG.Add(slotGO.GetComponentInChildren<Image>());
+                if (slotID < inv.slots.Count)
+                {
+                    itemTxt[slotID].text = inv.slots[slotID].amount.ToString();
+                    iconIMG[slotID].sprite = inv.slots[slotID].itemType.icon;
+                }
+
+            }
+        }
+    }
+
 }

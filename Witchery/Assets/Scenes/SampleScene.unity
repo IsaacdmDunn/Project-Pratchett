@@ -507,7 +507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &378714575
 RectTransform:
   m_ObjectHideFlags: 0
@@ -945,6 +945,7 @@ MonoBehaviour:
   inventory: {fileID: 654324704}
   item: {fileID: 11400000, guid: 1b55f0f8ade03334ea850e22ee7fd965, type: 2}
   foragedMAT: {fileID: 2100000, guid: 315dbf0a485bf864a806e95a61410887, type: 2}
+  unforagedMAT: {fileID: 0}
   amount: 1
 --- !u!135 &678127737
 SphereCollider:
@@ -1222,6 +1223,7 @@ MonoBehaviour:
   inventory: {fileID: 654324704}
   item: {fileID: 11400000, guid: 3322e3a7c3d41504a82e1283cdebf4a4, type: 2}
   foragedMAT: {fileID: 2100000, guid: 315dbf0a485bf864a806e95a61410887, type: 2}
+  unforagedMAT: {fileID: 0}
   amount: 15
 --- !u!135 &733294480
 SphereCollider:
@@ -1352,6 +1354,7 @@ MonoBehaviour:
   inventory: {fileID: 654324704}
   item: {fileID: 11400000, guid: 3322e3a7c3d41504a82e1283cdebf4a4, type: 2}
   foragedMAT: {fileID: 2100000, guid: 315dbf0a485bf864a806e95a61410887, type: 2}
+  unforagedMAT: {fileID: 0}
   amount: 15
 --- !u!1 &858690249
 GameObject:
@@ -6315,7 +6318,7 @@ GameObject:
   - component: {fileID: 1053487481}
   - component: {fileID: 1053487482}
   - component: {fileID: 1053487486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -6501,6 +6504,7 @@ MonoBehaviour:
   inventory: {fileID: 654324704}
   item: {fileID: 11400000, guid: 1b55f0f8ade03334ea850e22ee7fd965, type: 2}
   foragedMAT: {fileID: 2100000, guid: 315dbf0a485bf864a806e95a61410887, type: 2}
+  unforagedMAT: {fileID: 0}
   amount: 1
 --- !u!135 &1100426506
 SphereCollider:
@@ -7077,12 +7081,12 @@ MonoBehaviour:
   inventoryUITitleTxt: {fileID: 712043003}
   defaultIconImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   SlotPrefab: {fileID: 5453308562161181034, guid: b4edce8aa8e403d4dac33dac4f43895c, type: 3}
+  cameraLook: {fileID: 963194229}
   sizeX: 5
   sizeY: 4
   descriptionUI: {fileID: 2021622460}
   descriptionTXT: {fileID: 2092990561}
   descriptionTitleTxt: {fileID: 2121311207}
-  cameraLook: {fileID: 963194229}
 --- !u!1 &1278150102
 GameObject:
   m_ObjectHideFlags: 0
@@ -7409,7 +7413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1376201732
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7450,6 +7454,7 @@ MonoBehaviour:
   inventoryUITitleTxt: {fileID: 1412785270}
   defaultIconImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   SlotPrefab: {fileID: 6383393948200776925, guid: fb6ccc05e097c714da12842673013e72, type: 3}
+  cameraLook: {fileID: 963194229}
   sizeX: 1
   sizeY: 6
   cauldron: {fileID: 1920773163}
@@ -7525,7 +7530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1412785271
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7709,6 +7714,7 @@ MonoBehaviour:
   inventoryUITitleTxt: {fileID: 0}
   defaultIconImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   SlotPrefab: {fileID: 5453308562161181034, guid: b4edce8aa8e403d4dac33dac4f43895c, type: 3}
+  cameraLook: {fileID: 963194229}
   sizeX: 1
   sizeY: 8
   inventoryOpen: 0
@@ -7874,8 +7880,10 @@ MonoBehaviour:
   inventoryUITitleTxt: {fileID: 1880322508}
   defaultIconImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   SlotPrefab: {fileID: 5453308562161181034, guid: b4edce8aa8e403d4dac33dac4f43895c, type: 3}
+  cameraLook: {fileID: 963194229}
   sizeX: 2
   sizeY: 4
+  playerInventoryUI: {fileID: 1180357387}
 --- !u!1 &1554988048
 GameObject:
   m_ObjectHideFlags: 0
@@ -8365,6 +8373,7 @@ MonoBehaviour:
   inventory: {fileID: 654324704}
   item: {fileID: 11400000, guid: 3322e3a7c3d41504a82e1283cdebf4a4, type: 2}
   foragedMAT: {fileID: 2100000, guid: 315dbf0a485bf864a806e95a61410887, type: 2}
+  unforagedMAT: {fileID: 0}
   amount: 15
 --- !u!135 &1890823895
 SphereCollider:
@@ -8494,6 +8503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cauldrenMixture: {fileID: 1920773162}
+  cauldronUI: {fileID: 1376201733}
+  playerInvUI: {fileID: 1180357387}
   liquid: {fileID: 2100000, guid: 58a931e376ff4d34ba6864cf65de26e2, type: 2}
   flameOn: 0
 --- !u!1 &2003236063

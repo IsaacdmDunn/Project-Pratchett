@@ -7,12 +7,13 @@ public class ItemPickup : MonoBehaviour
     public InventoryStorage inventory;
     [SerializeField] public ItemType item;
     [SerializeField] Material foragedMAT;
+    [SerializeField] Material unforagedMAT;
     bool foragable = true;
     [SerializeField] int amount = 1;
     // Start is called before the first frame update
     void Start()
     {
-        
+        unforagedMAT = gameObject.GetComponent<MeshRenderer>().material;
     }
 
     // Update is called once per frame
@@ -23,20 +24,15 @@ public class ItemPickup : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        
+        //if player in near object 
         if(other.tag == "Player")
         {
-
+            //if its foragable and player pressed E then add item to inventory
             if (foragable && Input.GetKey(KeyCode.E))
             {
                 inventory.AddItem(item, amount);
                 foragable = false;
                 gameObject.GetComponent<MeshRenderer>().material = foragedMAT;
-                //slot = new InventoryStorage.Slot();
-                //slot.itemType = item;
-                //slot.amount += 1;
-                //inventory.slots.Add(slot);
-                //Debug.Log("dwkajdioha");
             }
         }
     }

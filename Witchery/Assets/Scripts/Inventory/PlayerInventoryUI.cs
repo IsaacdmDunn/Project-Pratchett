@@ -11,29 +11,9 @@ public class PlayerInventoryUI : InventoryUI
     public Text descriptionTXT;
     public Text descriptionTitleTxt;
 
-    public CameraLook cameraLook;
     private void Start()
     {
-        int slotID;
-        for (int x = 0; x < sizeX; x++)
-        {
-            for (int y = 0; y < sizeY; y++)
-            {
-                slotID = (x * sizeY) + y;
-                GameObject slotGO = Instantiate(SlotPrefab);
-                slotGO.transform.SetParent(inventoryUI.gameObject.transform);
-                slotGO.name = "inventorySlot " + (slotID).ToString();
-                slotGO.GetComponent<SlotEvent>().id = slotID;
-                itemTxt.Add(slotGO.GetComponentInChildren<Text>());
-                iconIMG.Add(slotGO.GetComponentInChildren<Image>());
-                if (slotID < inv.slots.Count)
-                {
-                    itemTxt[slotID].text = inv.slots[slotID].amount.ToString();
-                    iconIMG[slotID].sprite = inv.slots[slotID].itemType.icon;
-                }
-
-            }
-        }
+        GenerateSlots();
     }
     //updates inventory UI when item is picked up
     //TODO make it change a specific slot for efficientcy
@@ -61,42 +41,17 @@ public class PlayerInventoryUI : InventoryUI
     public void Update()
     {
         
-
+        //inventory open
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
             inventoryUITitleTxt.SetActive(!inventoryUITitleTxt.activeSelf);
             descriptionUI.SetActive(!descriptionUI.activeSelf);
-            cameraLook.enabled = !cameraLook.enabled;
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            
-        }
-        else if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            inventoryUITitleTxt.SetActive(!inventoryUITitleTxt.activeSelf);
-            cameraLook.enabled = !cameraLook.enabled;
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+
+            LockCursor();
         }
 
+        //update UI
         if (inv.inventoryUpdateRequired)
         {
             UpdateInventory();
@@ -104,8 +59,7 @@ public class PlayerInventoryUI : InventoryUI
         
     }
 
-    
-
+    //sets the description of an inventory item
     public void SetPlayerInventoryDecription(int slotID)
     {
         if (slotID < inv.slots.Count)
@@ -114,5 +68,30 @@ public class PlayerInventoryUI : InventoryUI
             descriptionTXT.text = inv.slots[slotID].itemType.description;
         }
         
+    }
+
+    //generates slots based on slot limit
+    void GenerateSlots()
+    {
+        int slotID;
+        for (int x = 0; x < sizeX; x++)
+        {
+            for (int y = 0; y < sizeY; y++)
+            {
+                slotID = (x * sizeY) + y;
+                GameObject slotGO = Instantiate(SlotPrefab);
+                slotGO.transform.SetParent(inventoryUI.gameObject.transform);
+                slotGO.name = "inventorySlot " + (slotID).ToString();
+                slotGO.GetComponent<SlotEvent>().id = slotID;
+                itemTxt.Add(slotGO.GetComponentInChildren<Text>());
+                iconIMG.Add(slotGO.GetComponentInChildren<Image>());
+                if (slotID < inv.slots.Count)
+                {
+                    itemTxt[slotID].text = inv.slots[slotID].amount.ToString();
+                    iconIMG[slotID].sprite = inv.slots[slotID].itemType.icon;
+                }
+
+            }
+        }
     }
 }

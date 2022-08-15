@@ -11,12 +11,19 @@ public class CameraLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //locks cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        LookAround();
+    }
+
+    //allows player to look around and clamps their movement
+    void LookAround()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivity;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivity;

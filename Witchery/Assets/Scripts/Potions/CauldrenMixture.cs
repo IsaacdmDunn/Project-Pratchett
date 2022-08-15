@@ -18,14 +18,18 @@ public class CauldrenMixture : MonoBehaviour
 
     public void Start()
     {
+        //gets all recipes for potions
         recipes.AddRange(Resources.LoadAll<Recipe>("Recipes/"));
-        recipes.RemoveAt(0);
+        recipes.RemoveAt(0);//sorts bug of recipe 0 being null
+
+        //FOR TESTING REMOVE
         foreach (ItemIngredient item in mixture)
         {
             itemIngredientIDs.Add(item.id);
             volume.Add(1f);
             totalVolume += 1f;
         }
+
     }
 
     public void LateUpdate()
@@ -34,18 +38,12 @@ public class CauldrenMixture : MonoBehaviour
        SetPotionColour();
     }
     
-    //searches
-    public void changeIngredientVolume(int id)
-    {
-        
-    }
-
+    //adds ingredient to mixture 
     public void AddIngredient(ItemIngredient itemToAdd)
     {
-        
+        //if the ingredient is already in mixture increase the volume of the ingredient in cauldron
         if (itemIngredientIDs.Contains( itemToAdd.id))
         {
-           
             for (int ingredientID= 0; ingredientID < mixture.Count; ingredientID++) 
             {
                 if (mixture[ingredientID].id == itemToAdd.id)
@@ -54,6 +52,7 @@ public class CauldrenMixture : MonoBehaviour
                 }
             }
         }
+        //else add new ingredient to mixture
         else
         {
             mixture.Add(itemToAdd);
@@ -61,6 +60,7 @@ public class CauldrenMixture : MonoBehaviour
             volume.Add(1f);
         }
         
+        //increase the total volume and tell UI to update
         totalVolume += 1f;
         updateUIRequired = true;
     }
@@ -68,7 +68,7 @@ public class CauldrenMixture : MonoBehaviour
     //removes ingredients when volume is too low
     public void RemoveEmptyIngredients()
     {
-
+        //checks each ingredient in mixture and if its below the mixrate remove from mixture
         for (int mixtureCounter = 0; mixtureCounter < mixture.Count; mixtureCounter++)
         {
             if (volume[mixtureCounter] < mixRate)
@@ -104,6 +104,9 @@ public class CauldrenMixture : MonoBehaviour
                     
                 }
 
+                //checks each ingredient to see if it needs increasing or deceasing based on its role
+                //in the recipe and if theres enough volume to make potion
+                //BUG: ONLY NEEDS ONE INGREDIENT TO MAKE A POTION
                 for (int mixtureCounter = 0; mixtureCounter < mixture.Count; mixtureCounter++)
                 {
                     if (volume[mixtureCounter] >= mixRate)
@@ -125,6 +128,7 @@ public class CauldrenMixture : MonoBehaviour
         }
     }
 
+    //sets the color of the mixture to the weighted sum of eachs liquid volumes
     public void SetPotionColour()
     {
         liquidColor = new Vector4(0f, 0f, 0f, 0f);

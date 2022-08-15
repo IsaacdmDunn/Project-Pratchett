@@ -13,20 +13,41 @@ public class InventoryUI : MonoBehaviour
     public Sprite defaultIconImage;
 
     public GameObject SlotPrefab;
+    public CameraLook cameraLook;
 
     [SerializeField] protected int sizeX = 5;
     [SerializeField] protected int sizeY = 4;
 
+    //check item in inventory slot
     protected void CheckItemType(int slotID)
     {
+        //if potion set color to potion mixture color
         if (inv.slots[slotID].itemType.GetType() == typeof(ItemPotion))
         {
             ItemPotion tempPotion = (ItemPotion)inv.slots[slotID].itemType;
             iconIMG[slotID].color = new Color (tempPotion.potionColour.r, tempPotion.potionColour.g, tempPotion.potionColour.b, 1f);
         }
+        //else reset color
         else
         {
             iconIMG[slotID].color = new Color(1f, 1f, 1f, 1f);
+        }
+    }
+
+    //locks camera and cursor
+    public void LockCursor()
+    {
+
+        cameraLook.enabled = !cameraLook.enabled;
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
     

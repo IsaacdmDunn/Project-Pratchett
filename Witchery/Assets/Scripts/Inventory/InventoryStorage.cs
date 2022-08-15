@@ -13,15 +13,20 @@ public class InventoryStorage : MonoBehaviour
 
     public bool inventoryUpdateRequired = false;
     [SerializeField]public InventoryStorage otherInventory = null;
+    public List<Slot> slots;
+    [SerializeField] int slotLimit;
 
     public void Start()
     {
         
     }
 
+    //add new item to inventory
     public void AddItem(ItemType itemToAdd, int amount)
     {
         inventoryUpdateRequired = true;
+        
+        //check item exists if so add amount and return
         for (int i = 0; i < slots.Count; i++)
         {
             
@@ -32,6 +37,8 @@ public class InventoryStorage : MonoBehaviour
                 return;
             }
         }
+
+        //if there is room in inventory add new item
         if (slots.Count < slotLimit)
         {
             Slot slot = new Slot();
@@ -43,6 +50,7 @@ public class InventoryStorage : MonoBehaviour
 
     }
 
+    //moves items from one inventory to another
     public void MoveItem(int slotID, int amount)
     {
         inventoryUpdateRequired = true;
@@ -50,11 +58,11 @@ public class InventoryStorage : MonoBehaviour
         otherInventory.AddItem(slots[slotID].itemType, 1);
         if (slots[slotID].amount == 0)
         {
-            
             slots.RemoveAt(slotID);
         }
     }
 
+    //moves whole stack of items
     public void MoveStack(int slotID)
     {
         inventoryUpdateRequired = true;
@@ -63,8 +71,6 @@ public class InventoryStorage : MonoBehaviour
         slots.RemoveAt(slotID);
     }
 
-    public List<Slot> slots;
-    [SerializeField] int slotLimit;
 
     
 }

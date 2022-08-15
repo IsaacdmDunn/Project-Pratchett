@@ -24,29 +24,14 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
+        CheckGround();
+        MovePlayer();
+        PlayerJump();
+    }
 
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            controller.Move(move * speed * sprintMod * Time.deltaTime);
-        }
-        else 
-        {
-            controller.Move(move * speed * Time.deltaTime);
-        }
-        
-
+    //player jump
+    void PlayerJump()
+    {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jump * -2 * gravity);
@@ -55,5 +40,35 @@ public class CharacterMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    //moves player
+    void MovePlayer()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        //sprint
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            controller.Move(move * speed * sprintMod * Time.deltaTime);
+        }
+        else
+        {
+            controller.Move(move * speed * Time.deltaTime);
+        }
+    }
+
+    //checks if player is on ground
+    void CheckGround()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
     }
 }
