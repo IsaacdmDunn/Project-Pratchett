@@ -21,7 +21,10 @@ public class IdleNode : Node
         {
             RandomPosition();
         }
-
+        if (agent.remainingDistance > 0)
+        {
+            return NodeState.failure;
+        }
         agent.destination = idleTo;
 
         return NodeState.success;

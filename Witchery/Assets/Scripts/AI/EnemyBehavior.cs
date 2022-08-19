@@ -28,9 +28,9 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] Transform targetCharacter;
     [SerializeField] Transform targetFood;
     [SerializeField] NavMeshAgent agent;
-    int hungerAmount = 0;
+    [SerializeField] EnemyStats stats;
     int layerMask = 1 << 6;
-    float viewDistance = 10.0f;
+    
 
 
     void Awake()
@@ -43,15 +43,15 @@ public class EnemyBehavior : MonoBehaviour
     {
         //idle behavior
         idle = new IdleNode(agent);
-
+   
         //eating behavior
-        hunger = new HungerNode();
+        hunger = new HungerNode(stats);
         walkToFood = new WalkNode(agent, targetFood);
-        eat = new EatNode();
+        eat = new EatNode(agent, targetFood, stats);
         eatingSQC = new Sequence(new List<Node> {hunger, walkToFood, eat});
         
         //attacking behavior
-        searchForPlayer = new DetectionNode(this.transform, viewDistance, layerMask, targetCharacter);
+        searchForPlayer = new DetectionNode(this.transform, stats.viewDistance, layerMask, targetCharacter);
         walkToTarget = new WalkNode(agent, targetCharacter); //targets player for now
         attackTarget = new AttackNode();
         attackingSQC = new Sequence(new List<Node> {searchForPlayer, walkToTarget, attackTarget});
@@ -62,11 +62,11 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     //NEED BETTER WAY --- DONT CALL EVERY UPDATE
-    private void Update()
+    private void FixedUpdate()
     {
         
         topNode.Evaluate();
 
-
+        stats.hungerAmount += 0.02f;
     }
 }

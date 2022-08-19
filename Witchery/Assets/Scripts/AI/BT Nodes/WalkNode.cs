@@ -16,7 +16,14 @@ public class WalkNode : Node
 
     public override NodeState Evaluate()
     {
-        agent.destination = target.position;
-        return NodeState.success;
+        agent.SetDestination(target.position);
+
+        if (agent.remainingDistance == 0)
+        {
+            return NodeState.success;
+        }
+
+        return NodeState.running;
+        
     }
 }

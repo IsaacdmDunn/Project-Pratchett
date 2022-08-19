@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//RENAME
 public class HungerNode : Node
 {
-    public HungerNode()
+    EnemyStats stats;
+    public HungerNode(EnemyStats _stats)
     {
-
+        stats = _stats;
     }
 
     public override NodeState Evaluate()
     {
-        return NodeState.success;
+        
+        if (stats.hungerAmount > stats.hungerThreshold)
+        {
+            Debug.Log("hungy");
+            
+            return NodeState.success;
+        }
+        return NodeState.failure;
     }
 }
