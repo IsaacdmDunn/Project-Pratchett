@@ -10,7 +10,7 @@ public class CauldronUI : InventoryUI
     [SerializeField] int cauldrenDisplayLimit = 10;
     public bool isEmptying = false;
     [SerializeField] Sprite potionBottleSprite;
-    [SerializeField] TextEditor potionName;
+    [SerializeField] InputField potionName;
     /// <summary>
     /// TODO make big inventory with optimised for size and scrolling
     /// </summary>
@@ -86,18 +86,57 @@ public class CauldronUI : InventoryUI
     //serialises the elements of a potions and creates an item for it to add to the inventory
     public void MakePotion()
     {
+        //remove potion from cauldron mixture NEEDS TWEAKING taking more than needed
         for (int ingredientVolume = 0; ingredientVolume < cauldron.cauldrenMixture.volume.Count; ingredientVolume++)
         {
-            cauldron.cauldrenMixture.volume[ingredientVolume] -= (1f * cauldron.cauldrenMixture.volume[ingredientVolume] / cauldron.cauldrenMixture.volume.Count);
+            cauldron.cauldrenMixture.volume[ingredientVolume] -= (1f * cauldron.cauldrenMixture.volume[ingredientVolume] / (cauldron.cauldrenMixture.volume.Count +1));
         }
+
+        //makes new potion from mixture
         ItemPotion potionToMake = new ItemPotion();
-        potionToMake.displayName = "New Potion";
-        potionToMake.description = "make system to show effects";
+
+        //set potion name
+        if (potionName.text == "")
+        {
+            potionToMake.displayName = "New Potion";
+        }
+        else
+        {
+            potionToMake.displayName = potionName.text;
+        }
+        
+        //set values for potion
         potionToMake.potionColour = cauldron.cauldrenMixture.liquidColor;
         potionToMake.volumes = cauldron.cauldrenMixture.volume;
         potionToMake.ingredientEffects = cauldron.cauldrenMixture.mixture;
         potionToMake.icon = potionBottleSprite;
 
+        //set description for potion 
+
+        //each effect
+        potionToMake.description = "Effects: \n";
+        for (int i = 0; i < potionToMake.volumes.Count; i++)
+        {
+            for (int j = 0; j < potionToMake.ingredientEffects[i].ingredientEffects.Count; j++)
+            {
+                potionToMake.description += "Gives " + potionToMake.ingredientEffects[i].potentcy + " " + potionToMake.ingredientEffects[i].ingredientEffects[j];
+                if (potionToMake.ingredientEffects[i].effectLength > 0)
+                {
+                    potionToMake.description += " lasts for " + potionToMake.ingredientEffects[i].effectLength + " seconds";
+                }
+                potionToMake.description += "\n";
+            }
+        }
+
+        //each ingredient
+        potionToMake.description += "Ingredients: \n";
+        for (int i = 0; i < potionToMake.volumes.Count; i++)
+        {
+                potionToMake.description += potionToMake.ingredientEffects[i].displayName + " " + (potionToMake.volumes[i] * 100) + "%";
+                potionToMake.description += "\n";
+        }
+
+        //add to inventory
         inv.AddItem(potionToMake, 1);
     }
 

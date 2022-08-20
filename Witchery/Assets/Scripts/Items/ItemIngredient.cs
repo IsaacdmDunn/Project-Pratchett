@@ -6,10 +6,10 @@ using UnityEngine;
 public class ItemIngredient : ItemType
 {
     [SerializeField] public Color potionColour;
-    [SerializeField] List<Effect> ingredientEffects;
-    [SerializeField] float potentcy;
-    [SerializeField] float effectLength;
-    enum Effect
+    [SerializeField] public List<Effect> ingredientEffects;
+    [SerializeField] public float potentcy;
+    [SerializeField] public float effectLength;
+    public enum Effect
     {
         None,
         HealthRegen,
@@ -17,7 +17,6 @@ public class ItemIngredient : ItemType
         DamageIncrease,
     }
 
-    
 }
 
 
