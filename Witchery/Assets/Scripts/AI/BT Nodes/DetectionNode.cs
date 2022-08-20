@@ -6,54 +6,68 @@ public class DetectionNode : Node
 {
     Transform transform;
     Transform potentialTarget;
-    float viewDistance;
-    float FOV = 90f; 
+    EnemyStats stats;
+    float FOV = 180f; 
     int layerMask;
 
     RaycastHit hitInfo;
-
-    public DetectionNode(Transform _transform, float _viewDistance, int _layerMask, Transform _potentialTarget)
+    GameObject go = new GameObject();
+    public DetectionNode(Transform _transform, EnemyStats _stats, int _layerMask, Transform _potentialTarget)
     {
         transform = _transform;
         potentialTarget = _potentialTarget;
-        viewDistance = _viewDistance;
+        stats = _stats;
         layerMask = _layerMask;
         layerMask = ~layerMask;
-        
     }
 
     public override NodeState Evaluate()
     {
-        GameObject go = new GameObject();
+        //create copy of tranform to keep raycast above ground
         go.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         go.transform.rotation = transform.rotation;
+        go.transform.SetParent(this.transform);
 
+        //get y angle of agent
         float offset = transform.localEulerAngles.y;
 
-        if (Distance(transform.position.x, transform.position.z, potentialTarget.position.x, potentialTarget.position.z) < viewDistance)
+        //checks if detection target is in view range
+        float dist = Distance(transform.position.x, transform.position.z, potentialTarget.position.x, potentialTarget.position.z);
+        if (dist < stats.viewDistance)
         {
+            //checks if target is in FOV
             float angle = Vector3.Angle(potentialTarget.position-transform.position, transform.forward);
             if (angle > (-(FOV/2)) && angle < ((FOV / 2)) )
             {
-                if (Physics.Raycast(go.transform.position, (potentialTarget.position - transform.position), out hitInfo, Mathf.Infinity, layerMask))
+                //if raycast can hit object increase awareness
+                if (Physics.Raycast(go.transform.position, (potentialTarget.position - transform.position), out hitInfo, stats.viewDistance, layerMask))
                 {
-                    Debug.DrawRay(go.transform.position, (potentialTarget.position - transform.position) * hitInfo.distance, Color.green);
-
-
-                    return NodeState.success;
+                    stats.awarenessAmount += stats.awarenessRise / dist * ((float)stats.awareness + 1);
+                    
                 }
             }
             
         }
-        
 
+        //if spotted return sucess
+        if (stats.awareness == EnemyStats.Awareness.SPOTTED)
+        {
+            return NodeState.success;
+        }
+        //return sucess to get AI to move to location NEEDS IMPROVEMENT
+        else if (stats.awareness == EnemyStats.Awareness.AWARE || stats.awareness == EnemyStats.Awareness.SUSPICIOUS)
+        {
+            return NodeState.success;
+        }
+        //if awareness is normal then fail
+        else
+        {
+            return NodeState.failure;
+        }
 
         
-        Debug.DrawRay(go.transform.position, go.transform.position- go.transform.TransformDirection(Vector3.forward) * hitInfo.distance, Color.red);
-        Debug.DrawRay(go.transform.position, (potentialTarget.position - transform.position) * hitInfo.distance, Color.red);
-        return NodeState.failure;
     }
-
+    //gets distance between 2 objects
     static float Distance(float x1, float y1, float x2, float y2)
     {
         // Calculating distance
@@ -61,8 +75,4 @@ public class DetectionNode : Node
                       Mathf.Pow(y2 - y1, 2) * 1.0f);
     }
 
-    float AngleBetweenVec(float x1, float y1, float x2, float y2)
-    {
-        return Mathf.Atan2(y2 - y1, x2 - x1) * Mathf.Rad2Deg;
-    }
 }

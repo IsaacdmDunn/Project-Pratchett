@@ -16,20 +16,26 @@ public class IdleNode : Node
 
     public override NodeState Evaluate()
     {
+        //countdown timer before targer position change
         timer -= Time.deltaTime;
         if (timer < 0)
         {
             RandomPosition();
         }
+
+        //if not at destination fail
         if (agent.remainingDistance > 0)
         {
             return NodeState.failure;
         }
+
+        //set destination
         agent.destination = idleTo;
 
         return NodeState.success;
     }
 
+    //select random position
     public void RandomPosition()
     {
         timer = Random.Range(3.0f, 10.0f);

@@ -10,6 +10,7 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] Material unforagedMAT;
     public bool foragable = true;
     [SerializeField] int amount = 1;
+    [SerializeField] int foodAmount = 50;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +36,19 @@ public class ItemPickup : MonoBehaviour
         }
     }
 
+    //removes item
     public void Forage()
     {
         inventory.AddItem(item, amount);
         foragable = false;
         gameObject.GetComponent<MeshRenderer>().material = foragedMAT;
+    }
+
+    public int Eat()
+    {
+
+        foragable = false;
+        gameObject.GetComponent<MeshRenderer>().material = foragedMAT;
+        return foodAmount;
     }
 }

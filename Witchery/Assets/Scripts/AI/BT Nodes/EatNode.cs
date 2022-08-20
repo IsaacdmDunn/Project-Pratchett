@@ -19,14 +19,13 @@ public class EatNode : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("eated");
+        //if nearby item and its foragable then eat and return sucess
         if (itemToEat.foragable && agent.remainingDistance < 0.3f)
         {
-            itemToEat.Forage();
-            stats.hungerAmount -= 30;
+            stats.hungerAmount -= itemToEat.Eat();
             return NodeState.success;
         }
 
-        return NodeState.failure;
+        return NodeState.failure; //behavior failed
     }
 }

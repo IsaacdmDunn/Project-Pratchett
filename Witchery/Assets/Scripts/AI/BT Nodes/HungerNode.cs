@@ -12,11 +12,9 @@ public class HungerNode : Node
 
     public override NodeState Evaluate()
     {
-        
+        //if hungry return sucess
         if (stats.hungerAmount > stats.hungerThreshold)
         {
-            Debug.Log("hungy");
-            
             return NodeState.success;
         }
         return NodeState.failure;
