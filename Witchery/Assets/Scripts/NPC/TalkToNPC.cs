@@ -10,12 +10,14 @@ public class TalkToNPC : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && Input.GetKeyDown(KeyCode.E))
+        //if player is nearby and no conversation is ongoing start dialog
+        if (other.tag == "Player" && Input.GetKeyDown(KeyCode.E) && dialogManager.convoFinished == false)
         {
             dialogManager.enabled = true;
             dialogUI.SetActive(true);
             cameraNPC.SetActive(true);
         }
+        //if conversation is finish
         else if (dialogManager.convoFinished)
         {
             dialogManager.enabled = false;

@@ -6,6 +6,11 @@ ScriptsOnlyBuild:
     - CauldrenMixture
     - CauldronUI
     - CharacterMovement
+    - Dialog
+    - DisplayDialog
+    - EnemyBehavior
+    - EnemyStats
+    - EnemyUI
     - HotbarUI
     - InventoryStorage
     - ItemIngredient
@@ -14,8 +19,10 @@ ScriptsOnlyBuild:
     - ItemTest
     - PlayerInventoryUI
     - Recipe
+    - ResponceHandler
     - ShopInventoryUI
     - SlotEvent
+    - TalkToNPC
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
@@ -32,6 +39,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.InputField
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
@@ -60,6 +69,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 104
@@ -69,55 +82,73 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1442}
     - Class: 114
-      Script: {instanceID: 1534}
+      Script: {instanceID: 1450}
     - Class: 114
-      Script: {instanceID: 1644}
+      Script: {instanceID: 1536}
     - Class: 114
-      Script: {instanceID: 1718}
+      Script: {instanceID: 1576}
     - Class: 114
-      Script: {instanceID: 1880}
+      Script: {instanceID: 1638}
     - Class: 114
-      Script: {instanceID: 1968}
+      Script: {instanceID: 1648}
     - Class: 114
-      Script: {instanceID: 2008}
+      Script: {instanceID: 1724}
     - Class: 114
-      Script: {instanceID: 2118}
+      Script: {instanceID: 1888}
     - Class: 114
-      Script: {instanceID: 2170}
+      Script: {instanceID: 1974}
     - Class: 114
-      Script: {instanceID: 2298}
+      Script: {instanceID: 2014}
+    - Class: 114
+      Script: {instanceID: 2124}
+    - Class: 114
+      Script: {instanceID: 2178}
+    - Class: 114
+      Script: {instanceID: 2306}
     - Class: 114
       Script: {instanceID: 2358}
     - Class: 114
-      Script: {instanceID: 2412}
+      Script: {instanceID: 2368}
     - Class: 114
-      Script: {instanceID: 2414}
+      Script: {instanceID: 2422}
     - Class: 114
-      Script: {instanceID: 2576}
+      Script: {instanceID: 2424}
     - Class: 114
-      Script: {instanceID: 2636}
+      Script: {instanceID: 2590}
     - Class: 114
-      Script: {instanceID: 2762}
+      Script: {instanceID: 2632}
+    - Class: 114
+      Script: {instanceID: 2650}
+    - Class: 114
+      Script: {instanceID: 2776}
     - Class: 114
       Script: {instanceID: 2846}
     - Class: 114
-      Script: {instanceID: 2978}
+      Script: {instanceID: 2862}
     - Class: 114
-      Script: {instanceID: 3104}
+      Script: {instanceID: 2926}
     - Class: 114
-      Script: {instanceID: 3200}
+      Script: {instanceID: 2998}
     - Class: 114
-      Script: {instanceID: 3274}
+      Script: {instanceID: 3130}
     - Class: 114
-      Script: {instanceID: 3348}
+      Script: {instanceID: 3226}
     - Class: 114
-      Script: {instanceID: 3378}
+      Script: {instanceID: 3300}
     - Class: 114
-      Script: {instanceID: 3388}
+      Script: {instanceID: 3374}
     - Class: 114
-      Script: {instanceID: 4400}
+      Script: {instanceID: 3404}
     - Class: 114
-      Script: {instanceID: 4464}
+      Script: {instanceID: 3414}
+    - Class: 114
+      Script: {instanceID: 3948}
+    - Class: 114
+      Script: {instanceID: 4434}
+    - Class: 114
+      Script: {instanceID: 4462}
+    - Class: 114
+      Script: {instanceID: 4502}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -129,6 +160,8 @@ ScriptsOnlyBuild:
     - Class: 143
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 195
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
@@ -144,6 +177,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
+    - Class: 238
+      Script: {instanceID: 0}
   scriptHashData:
   - hash:
       serializedVersion: 2
@@ -151,6 +186,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: 924aabf1f0b58ac756ef58cf4b286c74
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TalkToNPC
   - hash:
       serializedVersion: 2
       Hash: 5ab533713adae59372fb3e10a585c186
@@ -165,7 +206,7 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: 9d8197f474fe0cec6a7ec2d0ff282bbb
+      Hash: b15e727af7d201d2ce2b5bf982942664
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: HotbarUI
@@ -175,6 +216,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalAsset
+  - hash:
+      serializedVersion: 2
+      Hash: c9bbac628d9a6a32074b2c7d6a5ed843
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyStats
   - hash:
       serializedVersion: 2
       Hash: bcaee4c2a83047257b5f47d6ed264b75
@@ -237,12 +284,6 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MixtureRecipe
-  - hash:
-      serializedVersion: 2
       Hash: fad8d40c5122d2d303b26add622828de
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -279,7 +320,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: b5b6d24e6dfa52bd986454027542c309
+      Hash: dc482f0b85527329715490f47639aa80
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerInventoryUI
@@ -289,6 +330,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 826d00292a0c675f48ef62436f38c1d2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyUI
   - hash:
       serializedVersion: 2
       Hash: 0b732958f99a952399655e5a835cc3ad
@@ -369,7 +416,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: ee6dc4041dee6d8937141c985df7d4f5
+      Hash: 39e41508296ef17739a3e5a2314d2a0d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ItemPickup
@@ -417,10 +464,22 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
+      Hash: c4216391f5e718722364da33befad4fd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DisplayDialog
+  - hash:
+      serializedVersion: 2
       Hash: 69415240821be7986b27e72bf9609a30
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: 0fb7e5a907423bea5aa40b1e576b41cd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyBehavior
   - hash:
       serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
@@ -549,7 +608,7 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
-      Hash: 6abdf207a1ff0274132b3380087b71f5
+      Hash: f6da9807abd8dde6e0bb809273f4cc42
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShopInventoryUI
@@ -627,13 +686,19 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
+      Hash: eaf95107c10153bbe66b12ad31929c87
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ResponceHandler
+  - hash:
+      serializedVersion: 2
       Hash: 6980e81ddc615a861309d2d659cc3760
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: 6abdf207a1ff0274132b3380087b71f5
+      Hash: 1f8cbc6efca272aeaf88600e32678bde
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InventoryUI
@@ -675,11 +740,17 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: dca10b15a47191d5361d3d3b1c0bbdd7
+      Hash: 085b92af3e46d351e0653cefdd74ac90
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Dialog
+  - hash:
+      serializedVersion: 2
+      Hash: 87d5de9fdc784dd5d472fffc5e160b91
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CauldronUI
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/ganda/Desktop/builds/Witchery.exe
+  playerPath: C:/Users/ganda/Desktop/builds/0.11/Witchery.exe
