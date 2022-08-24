@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SR_NO
   m_EditorClassIdentifier: 
   dialog:
-  - Oh okay...
+  - Oh... $Okay?...
   responces: []

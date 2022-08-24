@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: SR_YES
   m_EditorClassIdentifier: 
   dialog:
-  - Oh thank goodness. I got sludged by me slimes the other day and need a health
-    regereation potion. you are a witch aren't you?
+  - Zoop...
   responces: []

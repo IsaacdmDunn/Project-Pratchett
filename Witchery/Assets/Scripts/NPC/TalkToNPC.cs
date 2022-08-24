@@ -10,6 +10,7 @@ public class TalkToNPC : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        
         //if player is nearby and no conversation is ongoing start dialog
         if (other.tag == "Player" && Input.GetKeyDown(KeyCode.E) && dialogManager.convoFinished == false)
         {

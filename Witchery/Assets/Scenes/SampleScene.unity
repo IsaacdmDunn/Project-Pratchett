@@ -616,6 +616,8 @@ GameObject:
   - component: {fileID: 253658428}
   - component: {fileID: 253658427}
   - component: {fileID: 253658429}
+  - component: {fileID: 253658431}
+  - component: {fileID: 253658432}
   - component: {fileID: 253658430}
   m_Layer: 0
   m_Name: DialogManager
@@ -780,6 +782,64 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &253658431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253658425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e75093950ad95548a612acc06935e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog: {fileID: 11400000, guid: 448981ea982f574488fb63609bf3f633, type: 2}
+  events:
+  - name: Yes
+    onPickedResponce:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 253658432}
+          m_TargetAssemblyTypeName: test, Assembly-CSharp
+          m_MethodName: SpawnObject
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: mghmhh
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: No
+    onPickedResponce:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 705507993}
+          m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_MethodName: set_name
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: john
+            m_BoolArgument: 1
+          m_CallState: 2
+--- !u!114 &253658432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253658425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431c57dcfe66f61488b429101d2ed998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &378714574
 GameObject:
   m_ObjectHideFlags: 0

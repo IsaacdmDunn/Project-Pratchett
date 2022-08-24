@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Slime Rancher 1
   m_EditorClassIdentifier: 
   dialog:
-  - Oh hello? Name's Slime, Slime Rancher...
+  - Oh hello? $Name's Slime, $Slime Rancher...
   - Watch out for those slimes there, the young one on my head is docile but when
     they as big as the ones out there, they'll sludge ya...
-  - Care to help me with something?
+  - Wanna... $see a magic trick
   responces:
   - responceText: Yes
     dialog: {fileID: 11400000, guid: 0c4774015a9a6f64084aca4c40cb19f8, type: 2}

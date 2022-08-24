@@ -9,6 +9,7 @@ public class DisplayDialog : MonoBehaviour
     [SerializeField] GameObject dialogUI;
     [SerializeField] float normalTypingSpeed = 0.02f;
     float typingSpeed = 0.02f;
+    float typingPauseSpeed = 0.52f;
     [SerializeField] Dialog sentances;//replace with better options
     int index = 0;
     public bool convoFinished = false;
@@ -21,6 +22,7 @@ public class DisplayDialog : MonoBehaviour
 
         foreach (char letter in sentances.Dialogue[index].ToCharArray())
         {
+           
             dialogTxt.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
@@ -30,6 +32,11 @@ public class DisplayDialog : MonoBehaviour
     void Start()
     {
         responceHandler = dialogUI.GetComponent<ResponceHandler>();
+
+        //if (TryGetComponent(out DialogResponseEvents responseEvents))
+        //{
+        //    AddResponseEvent(responseEvents.Events);
+        //}
 
         //start conversation on initialisation
         eh.Play();
@@ -98,5 +105,16 @@ public class DisplayDialog : MonoBehaviour
         typingSpeed = normalTypingSpeed;
         StopAllCoroutines();
         StartCoroutine(TypingEffect());
+
+        if (TryGetComponent(out DialogResponseEvents responseEvents))
+        {
+            AddResponseEvent(responseEvents.Events);
+        }
+
+    }
+
+    public void AddResponseEvent(ResponseEvent[] responseEvents)
+    {
+        responceHandler.AddReponseEvent(responseEvents);
     }
 }
