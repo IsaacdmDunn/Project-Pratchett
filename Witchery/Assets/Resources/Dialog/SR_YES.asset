@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SR_YES
   m_EditorClassIdentifier: 
   dialog:
-  - Zoop...
+  - Zoop... $Sun's exploded $Rip Bozo
   responces: []
+  isPunctuated: 

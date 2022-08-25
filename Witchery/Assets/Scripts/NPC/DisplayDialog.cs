@@ -15,16 +15,27 @@ public class DisplayDialog : MonoBehaviour
     public bool convoFinished = false;
     [SerializeField] AudioSource eh;
     private ResponceHandler responceHandler;
+    string currentSentence;
 
     //creates a typing effect by outputing one letter at a time via coroutine
     IEnumerator TypingEffect()
     {
-
+        currentSentence = "";
         foreach (char letter in sentances.Dialogue[index].ToCharArray())
         {
-           
-            dialogTxt.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            //uses $ for punctuation with $ being ignored for the UI text and extra pause time given
+            currentSentence += letter;
+            if (letter=='$')
+            {
+                yield return new WaitForSeconds(typingPauseSpeed);
+            }
+            else
+            {
+                dialogTxt.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            
+            
         }
     }
 
@@ -50,8 +61,9 @@ public class DisplayDialog : MonoBehaviour
         //continue text
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            
             //if typing is complete then get new sentance
-            if (dialogTxt.text == sentances.Dialogue[index])
+            if (currentSentence == sentances.Dialogue[index])
             {
                 GetNewSentence();
             }

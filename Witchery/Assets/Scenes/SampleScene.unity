@@ -802,7 +802,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 253658432}
           m_TargetAssemblyTypeName: test, Assembly-CSharp
-          m_MethodName: SpawnObject
+          m_MethodName: Yes
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -816,10 +816,10 @@ MonoBehaviour:
     onPickedResponce:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 705507993}
-          m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_MethodName: set_name
-          m_Mode: 5
+        - m_Target: {fileID: 253658432}
+          m_TargetAssemblyTypeName: test, Assembly-CSharp
+          m_MethodName: No
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -840,6 +840,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431c57dcfe66f61488b429101d2ed998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npc: {fileID: 1355183604}
+  light: {fileID: 705507994}
 --- !u!1 &378714574
 GameObject:
   m_ObjectHideFlags: 0

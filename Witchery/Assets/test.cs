@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    public void SpawnObject()
+    public GameObject npc;
+    public Light light;
+    public void No()
     {
-        Instantiate(new GameObject());
+        npc.SetActive(false);
+    }
+    public void Yes()
+    {
+        light.intensity = 10f;
     }
 }
