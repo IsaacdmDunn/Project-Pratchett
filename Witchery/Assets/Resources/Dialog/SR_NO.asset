@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: SR_NO
   m_EditorClassIdentifier: 
   dialog:
-  - Oh... $Okay?...
+  - Oh... $Okay?... &Fine then! Take these flowers and come back when you're not
+    boring.
   responces: []
+  emotes: 04000000

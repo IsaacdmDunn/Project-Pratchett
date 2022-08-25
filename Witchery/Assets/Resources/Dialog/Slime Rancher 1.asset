@@ -22,3 +22,4 @@ MonoBehaviour:
     dialog: {fileID: 11400000, guid: 0c4774015a9a6f64084aca4c40cb19f8, type: 2}
   - responceText: No
     dialog: {fileID: 11400000, guid: 3eeabce62ef72374b8d8a36895410a43, type: 2}
+  emotes: 030000000000000002000000

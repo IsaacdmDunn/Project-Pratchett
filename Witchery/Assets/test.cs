@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    public GameObject npc;
+    public InventoryStorage inv;
+    [SerializeField] ItemIngredient itemToAdd;
     public Light light;
     public void No()
     {
-        npc.SetActive(false);
+        inv.AddItem(itemToAdd, 30);
+
     }
     public void Yes()
     {

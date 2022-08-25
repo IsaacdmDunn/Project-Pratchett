@@ -16,10 +16,15 @@ public class DisplayDialog : MonoBehaviour
     [SerializeField] AudioSource eh;
     private ResponceHandler responceHandler;
     string currentSentence;
+    public NPC_UI NPC_UI_Emotes;
 
     //creates a typing effect by outputing one letter at a time via coroutine
     IEnumerator TypingEffect()
     {
+        if (sentances.Emotes.Length > 0)
+        {
+            NPC_UI_Emotes.ChangeEmote((NPC_UI.Emotions)sentances.Emotes[index]);
+        }
         currentSentence = "";
         foreach (char letter in sentances.Dialogue[index].ToCharArray())
         {
@@ -42,6 +47,11 @@ public class DisplayDialog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (sentances.Emotes.Length > 0)
+        {
+            NPC_UI_Emotes.ChangeEmote((NPC_UI.Emotions)sentances.Emotes[index]);
+        }
+
         responceHandler = dialogUI.GetComponent<ResponceHandler>();
 
         //if (TryGetComponent(out DialogResponseEvents responseEvents))
@@ -81,6 +91,7 @@ public class DisplayDialog : MonoBehaviour
     //gets a new sentance to display
     void GetNewSentence()
     {
+       
         //if sentance is available display is
         if (index < sentances.Dialogue.Length-1)
         {

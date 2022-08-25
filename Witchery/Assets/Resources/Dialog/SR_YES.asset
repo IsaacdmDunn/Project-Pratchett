@@ -15,4 +15,4 @@ MonoBehaviour:
   dialog:
   - Zoop... $Sun's exploded $Rip Bozo
   responces: []
-  isPunctuated: 
+  emotes: 01000000
