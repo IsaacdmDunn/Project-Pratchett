@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   displayName: Health Potion
-  description: 'Sadsa Brand Potions: Health potion \n garenty 15hp gain or your money
-    back. \n Nutrition: \n'
+  description: "Sadsa Brand Potions: Health potion \n garenty 15hp gain or your money
+    back. \nNutrition:\n1200 Kcal\n25g Fat\n14g Sugar \n1.5 Kg protein"
   icon: {fileID: 21300000, guid: a66c6f1b531e9fe4589fd25d3c1da158, type: 3}
   potionColour: {r: 1, g: 0, b: 0, a: 1}
   ingredientEffects:
   - {fileID: 11400000, guid: 2c015053398a6ae4b80371ef5edcd84f, type: 2}
+  volumes: []

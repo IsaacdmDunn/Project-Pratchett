@@ -7,6 +7,6 @@ public class ItemType : ScriptableObject
 {
     public int id;
     public string displayName;
-    public string description;
+    [SerializeField][TextArea] public string description;
     public Sprite icon;
 }
