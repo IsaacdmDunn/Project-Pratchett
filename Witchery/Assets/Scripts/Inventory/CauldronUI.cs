@@ -56,7 +56,6 @@ public class CauldronUI : InventoryUI
             else
             {
                 inv.MoveStack(inv.slots[0].itemType.id);
-                inv.slots.RemoveAt(0);
             }
         }
 
@@ -86,10 +85,19 @@ public class CauldronUI : InventoryUI
     //serialises the elements of a potions and creates an item for it to add to the inventory
     public void MakePotion()
     {
+        float tempTotal = cauldron.cauldrenMixture.totalVolume;
+        List<float> potionVolumes = new List<float>();
         //remove potion from cauldron mixture NEEDS TWEAKING taking more than needed
         for (int ingredientVolume = 0; ingredientVolume < cauldron.cauldrenMixture.volume.Count; ingredientVolume++)
         {
-            cauldron.cauldrenMixture.volume[ingredientVolume] -= (1f * cauldron.cauldrenMixture.volume[ingredientVolume] / (cauldron.cauldrenMixture.volume.Count +1));
+            float amountToRemove = cauldron.cauldrenMixture.volume[ingredientVolume] / tempTotal;
+            potionVolumes.Add(amountToRemove);
+            cauldron.cauldrenMixture.volume[ingredientVolume] -= amountToRemove;
+            cauldron.cauldrenMixture.totalVolume -= amountToRemove;
+            //cauldron.cauldrenMixture.volume[ingredientVolume] -= (1f / cauldron.cauldrenMixture.volume[ingredientVolume] / (cauldron.cauldrenMixture.volume.Count +1));
+
+
+
         }
 
         //makes new potion from mixture
@@ -107,7 +115,7 @@ public class CauldronUI : InventoryUI
         
         //set values for potion
         potionToMake.potionColour = cauldron.cauldrenMixture.liquidColor;
-        potionToMake.volumes = cauldron.cauldrenMixture.volume;
+        potionToMake.volumes = potionVolumes;
         potionToMake.ingredientEffects = cauldron.cauldrenMixture.mixture;
         potionToMake.icon = potionBottleSprite;
 

@@ -12,18 +12,17 @@ public class Recipe : ScriptableObject
     //checks if all ingredients to make the potions are in a cauldren's mixture
     public bool CheckIngredients(List<int> mixtureIngredients)
     {
-        
+        correctIngredientCount = 0;
         for (int i = 0; i < ingredentIDs.Count; i++)
         {
+           
             if (mixtureIngredients.Contains(ingredentIDs[i]))
             {
-                
                 correctIngredientCount++;
             }
 
             if (correctIngredientCount == ingredentIDs.Count)
             {
-                correctIngredientCount = 0;
                 return true;
             }
         }

@@ -18,5 +18,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: fea42aa2188016f46a9de98e3bc8b00c, type: 3}
   potionColour: {r: 1, g: 0.8700416, b: 0, a: 0.5372549}
   ingredientEffects: 02000000
-  potentcy: 0
-  effectLength: 0
+  potentcy: 15
+  effectLength: 30
