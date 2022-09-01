@@ -44,11 +44,17 @@ public class PlayerInventoryUI : InventoryUI
         //inventory open
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            inventoryUITitleTxt.SetActive(!inventoryUITitleTxt.activeSelf);
-            descriptionUI.SetActive(!descriptionUI.activeSelf);
+            if (uIManager.UIStatus != UIManager.UIState.Inventory)
+            {
+                uIManager.UIStatus = UIManager.UIState.Inventory;
+            }
+            else
+            {
+                uIManager.UIStatus = UIManager.UIState.Game;
+            }
+            
+            uIManager.UIStateChanged = true;
 
-            LockCursor();
         }
 
         //update UI

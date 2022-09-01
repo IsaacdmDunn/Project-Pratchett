@@ -12,7 +12,7 @@ public class Cauldren : MonoBehaviour
     public bool flameOn = false;
     bool isStirring = false;
     bool inUse = false;
-
+    public int cauldronID = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,9 +35,17 @@ public class Cauldren : MonoBehaviour
             //open cauldren UI
             else if (Input.GetKeyDown(KeyCode.E))
             {
-                cauldronUI.gameObject.SetActive(!cauldronUI.gameObject.activeSelf);
-                playerInvUI.SetActive(!playerInvUI.gameObject.activeSelf);
-                cauldronUI.LockCursor();
+                cauldronUI.uIManager.ChangeCauldron(cauldronID);
+                if (cauldronUI.uIManager.UIStatus != UIManager.UIState.Cauldron)
+                {
+                    cauldronUI.uIManager.UIStatus = UIManager.UIState.Cauldron;
+                }
+                else
+                {
+                    cauldronUI.uIManager.UIStatus = UIManager.UIState.Game;
+                }
+                
+                cauldronUI.uIManager.UIStateChanged = true;
             }
         }
     }

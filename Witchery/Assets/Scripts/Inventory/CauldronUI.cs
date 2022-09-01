@@ -29,7 +29,7 @@ public class CauldronUI : InventoryUI
         {
             if (slotID < cauldrenDisplayLimit && cauldron.cauldrenMixture.mixture.Count > slotID)
             {
-                itemTxt[slotID].text = cauldron.cauldrenMixture.mixture[slotID].displayName + " \n " + cauldron.cauldrenMixture.volume[slotID];
+                itemTxt[slotID].text = cauldron.cauldrenMixture.mixture[slotID].displayName + " \n " + Mathf.RoundToInt(cauldron.cauldrenMixture.volume[slotID] * 100) + "ml";
                 iconIMG[slotID].sprite = cauldron.cauldrenMixture.mixture[slotID].icon;
             }
             if (cauldron.cauldrenMixture.mixture.Count - 1 < slotID)

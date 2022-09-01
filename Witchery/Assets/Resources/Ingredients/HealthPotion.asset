@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670575468c4a60e429d182d07e764eef, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  id: 3
+  id: 4
   displayName: Health Potion
   description: Pog
-  icon: {fileID: 21300000, guid: fea42aa2188016f46a9de98e3bc8b00c, type: 3}
+  icon: {fileID: 21300000, guid: d162a97c7e5d77048bbcb35dd7b036e6, type: 3}
   potionColour: {r: 0.6886792, g: 0.07298569, b: 0.06107152, a: 0.85882354}
   ingredientEffects: 01000000
   potentcy: 15

@@ -5,6 +5,7 @@ public class ResponceHandler : MonoBehaviour
 {
     [SerializeField] private Button[] buttons;
     [SerializeField] DisplayDialog dialogUI;
+    
 
     private ResponseEvent[] responseEvents;
 

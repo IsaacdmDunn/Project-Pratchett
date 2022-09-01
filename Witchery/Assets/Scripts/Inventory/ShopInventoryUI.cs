@@ -40,12 +40,19 @@ public class ShopInventoryUI : InventoryUI
 
     public void Update()
     {
+
         //if I is pressed open shop inventory
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            //playerInventoryUI.SetActive(!inventoryUI.activeSelf);
-            inventoryUITitleTxt.SetActive(!inventoryUITitleTxt.activeSelf);
+            if (uIManager.UIStatus != UIManager.UIState.Storage)
+            {
+                uIManager.UIStatus = UIManager.UIState.Storage;
+            }
+            else
+            {
+                uIManager.UIStatus = UIManager.UIState.Game;
+            }
+            uIManager.UIStateChanged = true;
         }
 
         if (inv.inventoryUpdateRequired)
