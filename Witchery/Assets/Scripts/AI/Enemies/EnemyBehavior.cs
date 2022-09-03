@@ -22,11 +22,12 @@ public class EnemyBehavior : MonoBehaviour
     public WalkNode walkToTarget = null;
     public AttackNode attackTarget = null;
 
-
+    public List<GameObject> potentialTargetCharacters;
 
     //Reference knowledge
-    [SerializeField] Transform targetCharacter;
-    [SerializeField] Transform targetFood;
+    [SerializeField] ResourceManager resourceManager;
+    GameObject targetCharacter = null;
+    GameObject targetFood = null;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] EnemyStats stats;
     int layerMask = 1 << 6;
@@ -35,6 +36,17 @@ public class EnemyBehavior : MonoBehaviour
 
     void Awake()
     {
+        List<GameObject> npcs = resourceManager.GetNPCs();
+        foreach (GameObject npc in npcs)
+        {
+            if(npc.tag == "MainNPC")
+            {
+                potentialTargetCharacters.Add(npc);
+            }
+        }
+        potentialTargetCharacters.Add(resourceManager.GetPlayer());
+        GetClosestCharacter();
+        GetClosestFood();
         agent = GetComponent<NavMeshAgent>();
         ConstructBT();
     }
@@ -46,13 +58,13 @@ public class EnemyBehavior : MonoBehaviour
    
         //eating behavior
         hunger = new HungerNode(stats);
-        walkToFood = new WalkNode(agent, targetFood);
-        eat = new EatNode(agent, targetFood, stats);
+        walkToFood = new WalkNode(agent, targetFood.transform);
+        eat = new EatNode(agent, targetFood.gameObject, stats);
         eatingSQC = new Sequence(new List<Node> {hunger, walkToFood, eat});
         
         //attacking behavior
-        searchForPlayer = new DetectionNode(this.transform, stats, layerMask, targetCharacter);
-        walkToTarget = new WalkNode(agent, targetCharacter); //targets player for now
+        searchForPlayer = new DetectionNode(this.transform, stats, layerMask, resourceManager.GetNPCs(), resourceManager.GetPlayer());
+        walkToTarget = new WalkNode(agent, targetCharacter.transform); //targets player for now
         attackTarget = new AttackNode();
         attackingSQC = new Sequence(new List<Node> {searchForPlayer, walkToTarget, attackTarget});
      
@@ -64,7 +76,57 @@ public class EnemyBehavior : MonoBehaviour
     //NEED BETTER WAY --- DONT CALL EVERY UPDATE
     private void FixedUpdate()
     {
-        
+        walkToFood.SetTarget(targetFood.transform);
+        walkToTarget.SetTarget(targetCharacter.transform);
+        eat.SetTarget(targetFood.gameObject);
+        searchForPlayer.SetTarget(potentialTargetCharacters);
+        GetClosestCharacter();
+        GetClosestFood();
         topNode.Evaluate();
+       
+       
+    }
+
+    void GetClosestCharacter()
+    {
+        List<GameObject> npcs = resourceManager.GetNPCs();
+        foreach (GameObject npc in npcs)
+        {
+            if (npc.tag == "MainNPC")
+            {
+                potentialTargetCharacters.Add(npc);
+            }
+        }
+
+        float dist;
+        float bestDistance = 100000;
+        foreach (GameObject character in potentialTargetCharacters)
+        {
+            dist = Vector3.Distance(character.transform.position, this.gameObject.transform.position);
+            if (dist < bestDistance)
+            {
+                bestDistance = dist;
+                targetCharacter = character;
+            }
+        }
+    }
+
+    void GetClosestFood()
+    {
+        float dist;
+        float bestDistance = 100000;
+        foreach (GameObject enviromenalObj in resourceManager.GetEnviroment())
+        {
+            if (enviromenalObj.GetComponent<ItemPickup>().foragable)
+            {
+                dist = Vector3.Distance(enviromenalObj.transform.position, this.gameObject.transform.position);
+                if (dist < bestDistance)
+                {
+                    bestDistance = dist;
+                    targetFood = enviromenalObj;
+                }
+            }
+            
+        }
     }
 }

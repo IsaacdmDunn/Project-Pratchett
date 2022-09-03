@@ -27,4 +27,9 @@ public class WalkNode : Node
         return NodeState.running;
         
     }
+
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
 }

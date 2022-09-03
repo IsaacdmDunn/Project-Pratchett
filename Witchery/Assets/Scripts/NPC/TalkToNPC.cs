@@ -7,6 +7,7 @@ public class TalkToNPC : MonoBehaviour
     [SerializeField]DisplayDialog dialogManager;
     [SerializeField] GameObject dialogUI;
     [SerializeField] GameObject cameraNPC;
+    public bool isKillable = false;// move to npc info script
     public UIManager uIManager;
 
     private void OnTriggerStay(Collider other)

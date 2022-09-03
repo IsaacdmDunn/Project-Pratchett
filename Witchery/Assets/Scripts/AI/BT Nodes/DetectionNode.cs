@@ -5,17 +5,19 @@ using UnityEngine;
 public class DetectionNode : Node
 {
     Transform transform;
-    Transform potentialTarget;
+    List<GameObject> potentialTarget;
     EnemyStats stats;
     float FOV = 180f; 
     int layerMask;
 
     RaycastHit hitInfo;
     GameObject go = new GameObject();
-    public DetectionNode(Transform _transform, EnemyStats _stats, int _layerMask, Transform _potentialTarget)
+    public DetectionNode(Transform _transform, EnemyStats _stats, int _layerMask, List<GameObject> _potentialTarget,
+        GameObject player)
     {
         transform = _transform;
         potentialTarget = _potentialTarget;
+        potentialTarget.Add(player);
         stats = _stats;
         layerMask = _layerMask;
         layerMask = ~layerMask;
@@ -31,22 +33,26 @@ public class DetectionNode : Node
         //get y angle of agent
         float offset = transform.localEulerAngles.y;
 
-        //checks if detection target is in view range
-        float dist = Distance(transform.position.x, transform.position.z, potentialTarget.position.x, potentialTarget.position.z);
-        if (dist < stats.viewDistance)
+
+        for (int i = 0; i < potentialTarget.Count; i++)
         {
-            //checks if target is in FOV
-            float angle = Vector3.Angle(potentialTarget.position-transform.position, transform.forward);
-            if (angle > (-(FOV/2)) && angle < ((FOV / 2)) )
+            //checks if detection target is in view range
+            float dist = Distance(transform.position.x, transform.position.z, potentialTarget[i].transform.position.x, potentialTarget[i].transform.position.z);
+            if (dist < stats.viewDistance)
             {
-                //if raycast can hit object increase awareness
-                if (Physics.Raycast(go.transform.position, (potentialTarget.position - transform.position), out hitInfo, stats.viewDistance, layerMask))
+                //checks if target is in FOV
+                float angle = Vector3.Angle(potentialTarget[i].transform.position - transform.position, transform.forward);
+                if (angle > (-(FOV / 2)) && angle < ((FOV / 2)))
                 {
-                    stats.awarenessAmount += stats.awarenessRise / dist * ((float)stats.awareness + 1);
-                    
+                    //if raycast can hit object increase awareness
+                    if (Physics.Raycast(go.transform.position, (potentialTarget[i].transform.position - transform.position), out hitInfo, stats.viewDistance, layerMask))
+                    {
+                        stats.awarenessAmount += stats.awarenessRise / dist * ((float)stats.awareness + 1);
+
+                    }
                 }
+
             }
-            
         }
 
         //if spotted return sucess
@@ -73,6 +79,11 @@ public class DetectionNode : Node
         // Calculating distance
         return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2) +
                       Mathf.Pow(y2 - y1, 2) * 1.0f);
+    }
+
+    public void SetTarget(List<GameObject> _target)
+    {
+        potentialTarget = _target;
     }
 
 }
