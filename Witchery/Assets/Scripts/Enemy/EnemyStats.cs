@@ -13,6 +13,8 @@ public class EnemyStats : MonoBehaviour
     public float awarenessAmount = 0f;
     public Awareness awareness = Awareness.NORMAL;
 
+    [SerializeField] OnHit onHit;
+
     public float health = 100f;
     public enum Awareness
     {
@@ -22,10 +24,20 @@ public class EnemyStats : MonoBehaviour
         SPOTTED
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         SetAwareness();
         UpdateHunger();
+
+        if (onHit.isHit)
+        {
+            onHit.isHit = false;
+            health -= onHit.weapon.GetComponent<SwordAttack>().damage;
+        }
+        if (health < 0f)
+        {
+            this.gameObject.transform.position = new Vector3(100000f, 1000000, 100000);
+        }
     }
 
     //sets the state of awareness of the agent and clamps the value
