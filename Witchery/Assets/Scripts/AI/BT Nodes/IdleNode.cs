@@ -8,14 +8,17 @@ public class IdleNode : Node
     Vector3 idleTo;
     float timer;
     NavMeshAgent agent;
-    public IdleNode(NavMeshAgent _agent)
+    Animator animator;
+    public IdleNode(Animator _animator, NavMeshAgent _agent)
     {
         agent = _agent;
+        animator = _animator;
         RandomPosition();
     }
 
     public override NodeState Evaluate()
     {
+        animator.SetTrigger("Moving");
         //countdown timer before targer position change
         timer -= Time.deltaTime;
         if (timer < 0)

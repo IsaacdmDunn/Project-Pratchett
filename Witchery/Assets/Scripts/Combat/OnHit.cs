@@ -13,6 +13,6 @@ public class OnHit : MonoBehaviour
             weapon = other.gameObject;
             isHit = true;
         }
-
+        
     }
 }

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class AttackNode : Node
 {
-    public AttackNode()
+    Animator animator;
+    public AttackNode(Animator _animator)
     {
-
+        animator = _animator;
     }
 
     public override NodeState Evaluate()
     {
+        animator.SetTrigger("Attacking");
+
         return NodeState.success;
     }
 }

@@ -7,11 +7,14 @@ public class WalkNode : Node
 {
     Transform target;
     NavMeshAgent agent;
+    Animator animator;
 
-    public WalkNode(NavMeshAgent _agent, Transform _target)
+
+    public WalkNode(Animator _animator, NavMeshAgent _agent, Transform _target)
     {
         agent = _agent;
         target = _target;
+        animator = _animator;
     }
 
     public override NodeState Evaluate()
@@ -19,11 +22,12 @@ public class WalkNode : Node
         //walk to target 
         agent.SetDestination(target.position);
         //if at target return sucess
-        if (agent.remainingDistance == 0)
+        if (agent.remainingDistance < 0.3)
         {
             return NodeState.success;
+            
         }
-
+        animator.SetTrigger("Moving");
         return NodeState.running;
         
     }

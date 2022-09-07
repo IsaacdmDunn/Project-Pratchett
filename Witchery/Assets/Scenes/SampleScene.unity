@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44666374, g: 0.49651265, b: 0.5748689, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -367,7 +367,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52666959}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.1333704, y: -1.14, z: 19.723722}
+  m_LocalPosition: {x: 5.13337, y: -0.75, z: 19.72372}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1550019644}
@@ -426,6 +426,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb2885d1f1ed8144b60edb7e04455c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  mana: 100
+  stamina: 100
+  attackCooldown: 1
   hungerAmount: 0
   hungerThreshold: 70
   viewDistance: 50
@@ -434,7 +438,6 @@ MonoBehaviour:
   awarenessAmount: 0
   awareness: 0
   onHit: {fileID: 52666967}
-  health: 50
 --- !u!135 &52666965
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1201,7 +1204,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 279212819}
-  - component: {fileID: 279212820}
   m_Layer: 0
   m_Name: Player UI
   m_TagString: Untagged
@@ -1224,24 +1226,6 @@ Transform:
   m_Father: {fileID: 963194228}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &279212820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 279212818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4be56488aef47e4590fb8124786b287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  mana: 100
-  stamina: 100
-  healthBar: {fileID: 12777476}
-  manaBar: {fileID: 1556752147}
-  staminaBar: {fileID: 442811563}
 --- !u!1 &337463174
 GameObject:
   m_ObjectHideFlags: 0
@@ -2418,7 +2402,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 0.36
   m_Range: 10
   m_SpotAngle: 30
@@ -2476,13 +2460,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.40630704, y: -0.23480776, z: 0.10886963, w: 0.87631464}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 49.75, y: -30, z: 0}
 --- !u!1 &712043003
 GameObject:
   m_ObjectHideFlags: 0
@@ -8385,7 +8369,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.02568133, b: 0.066037714, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -8644,6 +8628,7 @@ GameObject:
   - component: {fileID: 1053487481}
   - component: {fileID: 1053487482}
   - component: {fileID: 1053487486}
+  - component: {fileID: 1053487487}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -8773,6 +8758,26 @@ CharacterController:
   m_SkinWidth: 0.6
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1053487487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053487480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4be56488aef47e4590fb8124786b287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  mana: 100
+  stamina: 100
+  healthBar: {fileID: 12777476}
+  manaBar: {fileID: 1556752147}
+  staminaBar: {fileID: 442811563}
+  invulnabilityTimer: 0
+  invulnabilityTime: 0
 --- !u!1 &1053812991
 GameObject:
   m_ObjectHideFlags: 0
@@ -9034,6 +9039,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1116078760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 897944c072370aa46924d1aa0b35b9ea, type: 3}
+  m_PrefabInstance: {fileID: 1967251848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1116078761
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116078760}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca0c3004ceba4cd4186c38f8170bd4a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1136666969
 GameObject:
   m_ObjectHideFlags: 0
@@ -12895,6 +12924,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 897944c072370aa46924d1aa0b35b9ea, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 897944c072370aa46924d1aa0b35b9ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -12996,7 +13029,7 @@ MonoBehaviour:
   weaponCollider: {fileID: 1684045766}
   attackCoolDown: 0.2
   timer: 11
-  stats: {fileID: 279212820}
+  stats: {fileID: 1053487487}
 --- !u!1 &2003236063
 GameObject:
   m_ObjectHideFlags: 0

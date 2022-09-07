@@ -9,12 +9,14 @@ public class EatNode : Node
     NavMeshAgent agent;
     ItemPickup itemToEat;
     EnemyStats stats;
-    public EatNode(NavMeshAgent _agent, GameObject _targetFood, EnemyStats _stats)
+    Animator animator;
+    public EatNode(Animator _animator, NavMeshAgent _agent, GameObject _targetFood, EnemyStats _stats)
     {
         targetFood = _targetFood;
         
         agent = _agent;
         stats = _stats;
+        animator = _animator;
     }
 
     public override NodeState Evaluate()
@@ -27,9 +29,13 @@ public class EatNode : Node
             if (itemToEat.foragable && agent.remainingDistance < 0.3f)
             {
                 stats.hungerAmount -= itemToEat.Eat();
+
+                animator.SetTrigger("Eating");
                 return NodeState.success;
             }
+            
         }
+        
         return NodeState.failure; //behavior failed
     }
 

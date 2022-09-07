@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStats : MonoBehaviour
+public class EnemyStats : Stats
 {
+    public float attackCooldown = 1f;
+
     public float hungerAmount = 0;
     public float hungerThreshold = 15;
 
@@ -15,7 +17,6 @@ public class EnemyStats : MonoBehaviour
 
     [SerializeField] OnHit onHit;
 
-    public float health = 100f;
     public enum Awareness
     {
         NORMAL,

@@ -31,11 +31,13 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] EnemyStats stats;
     int layerMask = 1 << 6;
-    
 
+    Animator animator;
 
     void Awake()
     {
+        animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
+
         List<GameObject> npcs = resourceManager.GetNPCs();
         foreach (GameObject npc in npcs)
         {
@@ -54,18 +56,18 @@ public class EnemyBehavior : MonoBehaviour
     void ConstructBT()
     {
         //idle behavior
-        idle = new IdleNode(agent);
+        idle = new IdleNode(animator, agent);
    
         //eating behavior
         hunger = new HungerNode(stats);
-        walkToFood = new WalkNode(agent, targetFood.transform);
-        eat = new EatNode(agent, targetFood.gameObject, stats);
+        walkToFood = new WalkNode(animator, agent, targetFood.transform);
+        eat = new EatNode(animator, agent, targetFood.gameObject, stats);
         eatingSQC = new Sequence(new List<Node> {hunger, walkToFood, eat});
         
         //attacking behavior
         searchForPlayer = new DetectionNode(this.transform, stats, layerMask, resourceManager.GetNPCs(), resourceManager.GetPlayer());
-        walkToTarget = new WalkNode(agent, targetCharacter.transform); //targets player for now
-        attackTarget = new AttackNode();
+        walkToTarget = new WalkNode(animator, agent, targetCharacter.transform); //targets player for now
+        attackTarget = new AttackNode(animator);
         attackingSQC = new Sequence(new List<Node> {searchForPlayer, walkToTarget, attackTarget});
      
         //starting node in BT
@@ -83,8 +85,8 @@ public class EnemyBehavior : MonoBehaviour
         GetClosestCharacter();
         GetClosestFood();
         topNode.Evaluate();
-       
-       
+        
+        
     }
 
     void GetClosestCharacter()
@@ -127,6 +129,14 @@ public class EnemyBehavior : MonoBehaviour
                 }
             }
             
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == targetCharacter.tag)
+        {
+            targetCharacter.GetComponent<Stats>().TakeDamage(5);
         }
     }
 }
