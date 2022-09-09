@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 34923482945680210}
   - component: {fileID: 2853283186809178008}
   m_Layer: 0
-  m_Name: Mushroom1
+  m_Name: FlyAgaric
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

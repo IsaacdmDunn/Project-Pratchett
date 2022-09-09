@@ -19,11 +19,11 @@ MonoBehaviour:
     x: 0
     y: 30
     width: 1536
-    height: 731
+    height: 730.8
   m_MinSize: {x: 577, y: 450}
   m_MaxSize: {x: 14000, y: 14021}
   vertical: 1
-  controlID: 1330
+  controlID: 22514
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,11 +133,11 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1536
-    height: 731
+    height: 730.8
   m_MinSize: {x: 577, y: 450}
   m_MaxSize: {x: 14000, y: 14021}
   vertical: 0
-  controlID: 1331
+  controlID: 22515
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -158,11 +158,11 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1059.2
-    height: 731
+    height: 730.8
   m_MinSize: {x: 302, y: 450}
   m_MaxSize: {x: 10000, y: 14021}
   vertical: 1
-  controlID: 1332
+  controlID: 22466
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_MinSize: {x: 302, y: 200}
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 1333
+  controlID: 22433
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -241,10 +241,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 78.79999}
+      scrollPos: {x: 0, y: 570.8}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 8cd8ffff50fbffff02410000
+      m_ExpandedIDs: 00c0feff22c0feff44c0feff66c0feff48c1feff5687ffff96a0ffffe0d5ffff52fbffff963e0000023f00000e4100002241000020430000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -260,7 +260,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 15}
+        m_ClientGUIView: {fileID: 6}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -331,9 +331,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 14.7142, y: -1.788345, z: -80.07281}
+    m_Target: {x: -11.795638, y: 1.1700002, z: 10.913034}
     speed: 2
-    m_Value: {x: 14.7142, y: -1.788345, z: -80.07281}
+    m_Value: {x: -11.795638, y: 1.1700002, z: 10.913034}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -380,13 +380,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0009214766, y: 0.9986774, z: -0.016484965, w: 0.05011296}
+    m_Target: {x: -0.25153977, y: 0.03512715, z: -0.009311557, w: -0.9673173}
     speed: 2
-    m_Value: {x: 0.00092141196, y: 0.9986074, z: -0.01648381, w: 0.050109446}
+    m_Value: {x: -0.2515026, y: 0.03512196, z: -0.00931018, w: -0.9671743}
   m_Size:
-    m_Target: 46.45755
+    m_Target: 0.24738614
     speed: 2
-    m_Value: 46.45755
+    m_Value: 0.24738614
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -429,7 +429,7 @@ MonoBehaviour:
     x: 0
     y: 459.2
     width: 1059.2
-    height: 271.8
+    height: 271.59998
   m_MinSize: {x: 230, y: 250}
   m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 11}
@@ -463,7 +463,7 @@ MonoBehaviour:
     x: 0
     y: 532.8
     width: 1058.2
-    height: 250.79999
+    height: 250.59998
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -478,22 +478,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Textures/Ingredients
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Textures/Ingredients
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ganda\Documents\GitHub\Project-Pratchett\Witchery
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 45}
-    m_SelectedIDs: 34460000
-    m_LastClickedID: 17972
-    m_ExpandedIDs: 000000002846000000ca9a3b
+    scrollPos: {x: 0, y: 61.400024}
+    m_SelectedIDs: d65f0000
+    m_LastClickedID: 24534
+    m_ExpandedIDs: 00000000524600008646000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -521,7 +521,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002846000000ca9a3b
+    m_ExpandedIDs: 000000005246000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -546,9 +546,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 6ef6ffff32f9ffff1cfbffff14f8ffff4cfaffff48fbffff
-    m_LastClickedInstanceID: -2450
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 6abc0200
+    m_LastClickedInstanceID: 179306
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000002400000cc3f00003aca0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -598,9 +598,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 532
-    width: 1058
-    height: 251
+    y: 532.8
+    width: 1058.2
+    height: 250.59998
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &13
 MonoBehaviour:
@@ -623,13 +623,13 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 532
-    width: 1259
-    height: 251
+    y: 532.8
+    width: 1058.2
+    height: 250.79999
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -7806
+  m_LastSelectedObjectID: -94892
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -726,7 +726,7 @@ MonoBehaviour:
     x: 1059.2
     y: 0
     width: 476.80005
-    height: 731
+    height: 730.8
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
@@ -757,7 +757,7 @@ MonoBehaviour:
     x: 1059.2001
     y: 73.6
     width: 475.80005
-    height: 710
+    height: 709.8
   m_ViewDataDictionary: {fileID: 0}
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
@@ -765,7 +765,7 @@ MonoBehaviour:
     m_CachedPref: -160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -2450
+  m_LastInspectedObjectInstanceID: 179306
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_LockTracker:
