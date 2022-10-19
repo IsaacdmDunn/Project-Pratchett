@@ -22,13 +22,13 @@ public class CauldrenMixture : MonoBehaviour
         recipes.AddRange(Resources.LoadAll<Recipe>("Recipes/"));
         recipes.RemoveAt(0);//sorts bug of recipe 0 being null
 
-        //FOR TESTING REMOVE
-        foreach (ItemIngredient item in mixture)
-        {
-            itemIngredientIDs.Add(item.id);
-            volume.Add(1f);
-            totalVolume += 1f;
-        }
+        ////FOR TESTING REMOVE
+        //foreach (ItemIngredient item in mixture)
+        //{
+        //    itemIngredientIDs.Add(item.id);
+        //    volume.Add(1f);
+        //    totalVolume += 1f;
+        //}
 
     }
 
@@ -115,9 +115,9 @@ public class CauldrenMixture : MonoBehaviour
                         {
                             volume[mixtureCounter] -= mixRate;
                         }
-                        else
+                        else if (recipe.outputIngredient.id == itemIngredientIDs[mixtureCounter])
                         {
-                            volume[mixtureCounter] += mixRate * recipe.ingredentIDs.Count;
+                            volume[mixtureCounter] += mixRate * recipe.ingredentIDs.Count;  //increasing all other ingredient values
                         }
                     }
                     

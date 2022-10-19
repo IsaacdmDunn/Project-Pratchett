@@ -16,18 +16,22 @@ public class WeaponController : MonoBehaviour
     Animator anim;
     
 
-    private void FixedUpdate()
+    private void Update()
     {
         timer += Time.fixedDeltaTime;
 
         anim = weapon.GetComponent<Animator>();
 
+        //if combo complete or player took to long to continue combo then reset combo
         if (comboCounter == 3 || timer > comboResetTimer)
         {
             comboCounter = 0;
         }
+
+        //if attack button is pressed
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            //check if attack cooldown is finished
             if (timer > attackCoolDown)
             {
                 weaponCollider = weapon.GetComponent<BoxCollider>();
@@ -35,19 +39,24 @@ public class WeaponController : MonoBehaviour
                 SwordAttack();
             }
         }
+        //attack finished
         else if (timer > attackCoolDown)
         {
             weaponCollider.enabled = false;
         }
         
     }
+
+    //attack being made
     void SwordAttack()
     {
         timer = 0;
 
-        
+        //set animation triggers
         anim.SetInteger("Combo", comboCounter);
         anim.SetTrigger("Attack");
+
+        //effects and sounds of combo move
         switch (comboCounter)
         {
             case 0:
@@ -66,6 +75,7 @@ public class WeaponController : MonoBehaviour
                 break;
         }
         
+        //play sound
         weapon.GetComponent<AudioSource>().Play();
         comboCounter++;
 

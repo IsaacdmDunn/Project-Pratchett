@@ -15,7 +15,6 @@ public class Recipe : ScriptableObject
         correctIngredientCount = 0;
         for (int i = 0; i < ingredentIDs.Count; i++)
         {
-           
             if (mixtureIngredients.Contains(ingredentIDs[i]))
             {
                 correctIngredientCount++;
@@ -25,6 +24,7 @@ public class Recipe : ScriptableObject
             {
                 return true;
             }
+            
         }
 
         return false;
