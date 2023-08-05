@@ -137,6 +137,7 @@ public class EnemyBehavior : MonoBehaviour
         if (other.tag == targetCharacter.tag)
         {
             targetCharacter.GetComponent<Stats>().TakeDamage(5);
+            topNode = new Selector(new List<Node> { idle});
         }
     }
 }

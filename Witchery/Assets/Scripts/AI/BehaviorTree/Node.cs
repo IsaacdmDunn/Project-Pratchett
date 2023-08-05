@@ -12,4 +12,6 @@ public abstract class Node
     {
         running, success, failure
     }
+
+    public int NodeID = -1;
 }
