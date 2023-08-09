@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyBehavior : MonoBehaviour
 {
     public Node topNode = null;
+    public GA ga = null;
 
     //idle behaviors
     public IdleNode idle = null;
@@ -50,7 +51,10 @@ public class EnemyBehavior : MonoBehaviour
         GetClosestCharacter();
         GetClosestFood();
         agent = GetComponent<NavMeshAgent>();
+        ga = new GA();
+        ga.initGenome();
         ConstructBT();
+
     }
 
     void ConstructBT()
@@ -69,9 +73,12 @@ public class EnemyBehavior : MonoBehaviour
         walkToTarget = new WalkNode(animator, agent, targetCharacter.transform); //targets player for now
         attackTarget = new AttackNode(animator);
         attackingSQC = new Sequence(new List<Node> {searchForPlayer, walkToTarget, attackTarget});
-     
+
         //starting node in BT
-        topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
+        //topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
+       
+        Debug.Log(ga.NodeList.Count);
+        topNode = new Selector(ga.NodeList);
 
     }
 
