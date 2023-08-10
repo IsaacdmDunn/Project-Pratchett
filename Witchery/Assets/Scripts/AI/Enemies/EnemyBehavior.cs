@@ -77,6 +77,8 @@ public class EnemyBehavior : MonoBehaviour
         //starting node in BT
         //topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
        
+        
+        ga.NodeList.Add(eatingSQC);
         Debug.Log(ga.NodeList.Count);
         topNode = new Selector(ga.NodeList);
 

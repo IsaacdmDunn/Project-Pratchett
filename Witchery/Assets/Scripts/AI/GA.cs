@@ -15,9 +15,7 @@ public class GA : MonoBehaviour
 
     public void initGenome()
     {
-        node = new Sequence(null);
-        NodeList.Add(node);
-        Debug.Log(NodeList.Count);
+        
     }
 
     public void Start()
