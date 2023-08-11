@@ -35,9 +35,11 @@ public class EnemyBehavior : MonoBehaviour
 
     Animator animator;
 
+    public int timer = 600;
+
     void Awake()
     {
-        ga.behaviorTree = this;
+        
         animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
 
         List<GameObject> npcs = resourceManager.GetNPCs();
@@ -53,35 +55,39 @@ public class EnemyBehavior : MonoBehaviour
         GetClosestFood();
         agent = GetComponent<NavMeshAgent>();
         ga = new GA();
-        ga.initGenome();
+        ga.behaviorTree = this;
+        
         ConstructBT();
-
+        ga.initGenome();
     }
 
     void ConstructBT()
     {
         //idle behavior
         idle = new IdleNode(animator, agent);
-   
+        
+
         //eating behavior
         hunger = new HungerNode(stats);
         walkToFood = new WalkNode(animator, agent, targetFood.transform);
         eat = new EatNode(animator, agent, targetFood.gameObject, stats);
         eatingSQC = new Sequence(new List<Node> {hunger, walkToFood, eat});
         
+
         //attacking behavior
         searchForPlayer = new DetectionNode(this.transform, stats, layerMask, resourceManager.GetNPCs(), resourceManager.GetPlayer());
         walkToTarget = new WalkNode(animator, agent, targetCharacter.transform); //targets player for now
         attackTarget = new AttackNode(animator);
         attackingSQC = new Sequence(new List<Node> {searchForPlayer, walkToTarget, attackTarget});
-
+        ga.NodeList.Add(attackingSQC);
+        ga.NodeList.Add(eatingSQC);
+        ga.NodeList.Add(idle);
         //starting node in BT
         //topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
-       
-        
-        ga.NodeList.Add(eatingSQC);
-        Debug.Log(ga.NodeList.Count);
-        topNode = new Selector(ga.NodeList);
+
+
+
+        topNode = new Selector(ga.genome);
 
     }
 
@@ -95,7 +101,16 @@ public class EnemyBehavior : MonoBehaviour
         GetClosestCharacter();
         GetClosestFood();
         topNode.Evaluate();
-        
+
+        if (timer == 0)
+        {
+            ga.Mutation();
+            timer = 200;
+        }
+        else
+        {
+            timer--;
+        }
         
     }
 
@@ -147,7 +162,6 @@ public class EnemyBehavior : MonoBehaviour
         if (other.tag == targetCharacter.tag)
         {
             targetCharacter.GetComponent<Stats>().TakeDamage(5);
-            topNode = new Selector(new List<Node> { idle});
         }
     }
 }

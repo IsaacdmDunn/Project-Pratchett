@@ -762,6 +762,7 @@ MonoBehaviour:
   resourceManager: {fileID: 258098718}
   agent: {fileID: 52666962}
   stats: {fileID: 52666964}
+  timer: 600
 --- !u!4 &52666961
 Transform:
   m_ObjectHideFlags: 0
