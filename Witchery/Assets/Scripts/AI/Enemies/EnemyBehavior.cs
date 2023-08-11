@@ -37,6 +37,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Awake()
     {
+        ga.behaviorTree = this;
         animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
 
         List<GameObject> npcs = resourceManager.GetNPCs();
