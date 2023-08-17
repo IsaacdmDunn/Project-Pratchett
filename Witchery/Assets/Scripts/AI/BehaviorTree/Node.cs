@@ -14,4 +14,5 @@ public abstract class Node
     }
 
     public int NodeID = -1;
+    public List<Node> nodes = new List<Node>();
 }

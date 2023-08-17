@@ -8,7 +8,7 @@ public class GA : MonoBehaviour
     public int mutationRate = 10;
     public int initGeneCount = 3;
     public EnemyBehavior behaviorTree;
-
+    int treeDepth;
     public List<Node> NodeList = new List<Node>();
 
 
@@ -17,9 +17,10 @@ public class GA : MonoBehaviour
     {
         for (int i = 0; i < initGeneCount; i++)
         {
-            int nodeID = Random.Range(0, NodeList.Count);
-            genome.Add(NodeList[nodeID]);
+            AddGene(i, genome);
+            
         }
+        treeDepth = 0;
     }
 
     //causes mutation in genome
@@ -28,12 +29,15 @@ public class GA : MonoBehaviour
         
         for (int i = 0; i < genome.Count; i++)
         {
+            if (genome[i].GetType() == typeof(Sequence))
+            {
+                Debug.Log("yes");
+            }
             int ran = Random.Range(0, mutationRate + 1);
-            Debug.Log(ran);
             if (ran == mutationRate)
             {
                 int mutationGeneID = Random.Range(0, NodeList.Count);
-                Debug.Log("mutation! " + ran);
+                Debug.Log("mutation!");
                 genome[i] = NodeList[mutationGeneID];
             }
         }
@@ -54,6 +58,25 @@ public class GA : MonoBehaviour
                     break;
             }
             
+            
+        }
+    }
+
+    void AddGene(int i, List<Node> list)
+    {
+        treeDepth++;
+        int nodeID = Random.Range(0, NodeList.Count);
+        list.Add(NodeList[nodeID]);
+        
+        if (list[i].GetType() == typeof(Sequence) || list[i].GetType() == typeof(Selector))
+        {
+            int i2 = 0;
+            while (i2 < Random.Range(0, 5) && treeDepth < 4)
+            {
+                Debug.Log(treeDepth + " " + i2);
+                AddGene(i2, list[i].nodes);
+                i2++;
+            } 
             
         }
     }

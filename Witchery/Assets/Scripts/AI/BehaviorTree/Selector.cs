@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Selector : Node
 {
-    protected List<Node> nodes = new List<Node>();
+    
     public Selector(List<Node> nodes)
     {
         this.nodes = nodes;
