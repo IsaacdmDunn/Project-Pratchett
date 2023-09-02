@@ -10,6 +10,7 @@ public class EnemyUI : MonoBehaviour
     [SerializeField] Slider awareness;
     [SerializeField] EnemyStats stats;
     [SerializeField] GameObject camera;
+    [SerializeField] Text abt;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +18,8 @@ public class EnemyUI : MonoBehaviour
         canvas.transform.rotation = Quaternion.LookRotation(transform.position - camera.transform.position);
 
         CheckAwareness();
+        abt.text = "Behaviour: " + stats.BT +  "\n";
+        abt.text += "Speech: " + stats.Speech;
 
         //updates hunger ui
         hunger.value = stats.hungerAmount;

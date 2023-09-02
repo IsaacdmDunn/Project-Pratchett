@@ -9,10 +9,12 @@ public class IdleNode : Node
     float timer;
     NavMeshAgent agent;
     Animator animator;
-    public IdleNode(Animator _animator, NavMeshAgent _agent)
+    EnemyStats stats;
+    public IdleNode(Animator _animator, NavMeshAgent _agent, EnemyStats _stats)
     {
         agent = _agent;
         animator = _animator;
+        stats = _stats;
         RandomPosition();
     }
 
@@ -34,6 +36,9 @@ public class IdleNode : Node
 
         //set destination
         agent.destination = idleTo;
+
+        stats.Speech = "I'm just wandering";
+        stats.BT = "Idle";
 
         return NodeState.success;
     }

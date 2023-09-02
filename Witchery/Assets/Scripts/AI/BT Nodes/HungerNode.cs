@@ -15,6 +15,9 @@ public class HungerNode : Node
         //if hungry return sucess
         if (stats.hungerAmount > stats.hungerThreshold)
         {
+            stats.Speech = "I'm hungry";
+            stats.BT = "Hungry";
+
             return NodeState.success;
         }
         return NodeState.failure;

@@ -21,7 +21,10 @@ public class EnemyBehavior : MonoBehaviour
     public Sequence attackingSQC = null;
     public DetectionNode searchForPlayer = null;
     public WalkNode walkToTarget = null;
+    public TalkNode talkToTarget = null;
     public AttackNode attackTarget = null;
+
+    public FleeNode flee = null;
 
     public List<GameObject> potentialTargetCharacters;
 
@@ -59,27 +62,34 @@ public class EnemyBehavior : MonoBehaviour
         
         ConstructBT();
         ga.initGenome();
+
+        stats.resourceManager = resourceManager;
     }
 
     void ConstructBT()
     {
         //idle behavior
-        idle = new IdleNode(animator, agent);
+        idle = new IdleNode(animator, agent, stats);
         
 
         //eating behavior
         hunger = new HungerNode(stats);
-        walkToFood = new WalkNode(animator, agent, targetFood.transform);
+        flee = new FleeNode(animator, agent, targetCharacter.transform, stats);
+        walkToFood = new WalkNode(animator, agent, targetFood.transform, stats);
         eat = new EatNode(animator, agent, targetFood.gameObject, stats);
-        eatingSQC = new Sequence(new List<Node> {hunger, walkToFood, eat});
+        eatingSQC = new Sequence(new List<Node> {hunger, walkToFood, eat });
         
 
         //attacking behavior
         searchForPlayer = new DetectionNode(this.transform, stats, layerMask, resourceManager.GetNPCs(), resourceManager.GetPlayer());
-        walkToTarget = new WalkNode(animator, agent, targetCharacter.transform); //targets player for now
-        attackTarget = new AttackNode(animator);
+        walkToTarget = new WalkNode(animator, agent, targetCharacter.transform, stats); //targets player for now
+        talkToTarget = new TalkNode(animator, agent, targetCharacter.transform, stats); //targets player for now
+        attackTarget = new AttackNode(animator, stats);
         attackingSQC = new Sequence(new List<Node> {searchForPlayer, walkToTarget, attackTarget});
         ga.NodeList.Add(attackingSQC);
+        ga.NodeList.Add(eatingSQC);
+        ga.NodeList.Add(idle);
+        ga.NodeList.Add(flee);
         ga.NodeList.Add(eatingSQC);
         ga.NodeList.Add(idle);
         //starting node in BT
@@ -102,15 +112,13 @@ public class EnemyBehavior : MonoBehaviour
         GetClosestFood();
         topNode.Evaluate();
 
-        if (timer == 0)
+        if (stats.traumatized)
         {
             ga.Mutation();
-            timer = 200;
+            stats.traumatized = false;
         }
-        else
-        {
-            timer--;
-        }
+
+        
         
     }
 

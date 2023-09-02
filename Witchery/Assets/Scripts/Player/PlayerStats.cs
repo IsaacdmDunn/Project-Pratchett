@@ -29,7 +29,7 @@ public class PlayerStats : Stats
         }
         else if (health < 0)
         {
-            Debug.Log("Player is dead");
+            //Debug.Log("Player is dead");
         }
 
         stamina += Time.fixedDeltaTime*3;

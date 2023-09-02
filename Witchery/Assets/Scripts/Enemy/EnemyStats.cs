@@ -14,8 +14,13 @@ public class EnemyStats : Stats
     public float awarenessFall = 0.5f;
     public float awarenessAmount = 0f;
     public Awareness awareness = Awareness.NORMAL;
+    public bool traumatized = false;
 
     [SerializeField] OnHit onHit;
+    public ResourceManager resourceManager;
+
+    public string BT = "None"; 
+    public string Speech = "None"; 
 
     public enum Awareness
     {
@@ -34,10 +39,18 @@ public class EnemyStats : Stats
         {
             onHit.isHit = false;
             health -= onHit.weapon.GetComponent<SwordAttack>().damage;
+            traumatized = true;
+            
         }
         if (health < 0f)
         {
             this.gameObject.transform.position = new Vector3(100000f, 1000000, 100000);
+            health = 1f;
+            foreach (GameObject npc in resourceManager.GetEnemies())
+            {
+                npc.GetComponent<EnemyBehavior>().ga.Mutation();
+            }
+
         }
     }
 

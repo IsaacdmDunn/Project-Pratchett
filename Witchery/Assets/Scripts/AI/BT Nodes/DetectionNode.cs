@@ -58,11 +58,15 @@ public class DetectionNode : Node
         //if spotted return sucess
         if (stats.awareness == EnemyStats.Awareness.SPOTTED)
         {
+            stats.Speech = "I see something";
+            stats.BT = "Detection";
             return NodeState.success;
         }
         //return sucess to get AI to move to location NEEDS IMPROVEMENT
         else if (stats.awareness == EnemyStats.Awareness.AWARE || stats.awareness == EnemyStats.Awareness.SUSPICIOUS)
         {
+            stats.Speech = "I think see something";
+            stats.BT = "Detection";
             return NodeState.success;
         }
         //if awareness is normal then fail
