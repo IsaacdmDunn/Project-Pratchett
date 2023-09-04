@@ -1,0 +1,30 @@
+make basic behaviours like callouts
+actions etc -- fight talk run away
+event system -- if attacked or other person talks trigger mutation
+
+idk how trigger system works
+someone dies or you are attacked personality change
+--how to detect that
+other ideas for later maybe got basics down
+
+talk how to make it work
+get debug message for talking
+(optional) speech bubble with behaviour and speech
+
+
+unity message system
+
+
+finish intro fix issues from rubric -today/tomorrow needs 300 words
+extra research 1000 words
+analysis of problem 100-600 words
+research onion - today/tomorrow - done
+artefact design 1500 words
+artefact implementation, testing, validation 1500
+
+evaluation 1500 words
+conclusion/ future work 700 words
+
+presentation
+
+
