@@ -11,6 +11,7 @@ public class ItemPickup : MonoBehaviour
     public bool foragable = true;
     [SerializeField] int amount = 1;
     [SerializeField] int foodAmount = 50;
+    int timer = 1200;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,12 @@ public class ItemPickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer--;
+        if (timer < 0)
+        {
+            ResetItem();
+            timer = 1200;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -50,5 +56,12 @@ public class ItemPickup : MonoBehaviour
         foragable = false;
         gameObject.GetComponent<MeshRenderer>().material = foragedMAT;
         return foodAmount;
+    }
+
+    public void ResetItem()
+    {
+        gameObject.GetComponent<MeshRenderer>().material = unforagedMAT;
+        foragable = true;
+        amount = 1;
     }
 }

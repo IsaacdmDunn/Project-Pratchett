@@ -15,11 +15,6 @@ public class ResourceManager : MonoBehaviour
     [SerializeField] float activeDistance = 10f;
     [SerializeField] float optimisingDistance = 15f;
     bool updateRequired= false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -33,6 +28,7 @@ public class ResourceManager : MonoBehaviour
         updateRequired = false;
     }
 
+    
     void CheckAllEnemies()
     {
         foreach (GameObject enemy in Enemies)
@@ -40,7 +36,7 @@ public class ResourceManager : MonoBehaviour
             float dist = Vector3.Distance(enemy.transform.position, player.transform.position);
             if (dist > activeDistance)
             {
-                enemy.SetActive(false);
+                //enemy.SetActive(false);
             }
             else
             {

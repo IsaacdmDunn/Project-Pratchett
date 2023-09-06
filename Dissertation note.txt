@@ -1,18 +1,7 @@
-make basic behaviours like callouts
-actions etc -- fight talk run away
 event system -- if attacked or other person talks trigger mutation
 
-idk how trigger system works
-someone dies or you are attacked personality change
---how to detect that
-other ideas for later maybe got basics down
-
-talk how to make it work
-get debug message for talking
-(optional) speech bubble with behaviour and speech
-
-
-unity message system
+need resource system to use all NPCs
+rename classes and objects and comment
 
 
 finish intro fix issues from rubric -today/tomorrow needs 300 words

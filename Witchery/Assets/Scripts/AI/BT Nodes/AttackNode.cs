@@ -14,9 +14,13 @@ public class AttackNode : Node
 
     public override NodeState Evaluate()
     {
+
+        //allows NPC attack collision to function
         animator.SetTrigger("Attacking");
         stats.Speech = "I'm gonna kill you";
         stats.BT = "Atacking";
+        stats.actionComplete = true;
+        stats.angry = true;
         return NodeState.success;
     }
 }

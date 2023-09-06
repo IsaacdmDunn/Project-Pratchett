@@ -5,19 +5,18 @@ using UnityEngine;
 public class DetectionNode : Node
 {
     Transform transform;
-    List<GameObject> potentialTarget;
+    GameObject potentialTarget;
     EnemyStats stats;
-    float FOV = 180f; 
+    float FOV = 270f; 
     int layerMask;
 
     RaycastHit hitInfo;
     GameObject go = new GameObject();
     public DetectionNode(Transform _transform, EnemyStats _stats, int _layerMask, List<GameObject> _potentialTarget,
-        GameObject player)
+        GameObject target)
     {
         transform = _transform;
-        potentialTarget = _potentialTarget;
-        potentialTarget.Add(player);
+        potentialTarget = target;
         stats = _stats;
         layerMask = _layerMask;
         layerMask = ~layerMask;
@@ -33,27 +32,21 @@ public class DetectionNode : Node
         //get y angle of agent
         float offset = transform.localEulerAngles.y;
 
+        
 
-        for (int i = 0; i < potentialTarget.Count; i++)
+        
+         //checks if detection target is in view range
+        float dist = Distance(transform.position.x, transform.position.z, potentialTarget.transform.position.x, potentialTarget.transform.position.z);
+        if (dist < stats.viewDistance)
         {
-            //checks if detection target is in view range
-            float dist = Distance(transform.position.x, transform.position.z, potentialTarget[i].transform.position.x, potentialTarget[i].transform.position.z);
-            if (dist < stats.viewDistance)
+            if (dist < 10)
             {
-                //checks if target is in FOV
-                float angle = Vector3.Angle(potentialTarget[i].transform.position - transform.position, transform.forward);
-                if (angle > (-(FOV / 2)) && angle < ((FOV / 2)))
-                {
-                    //if raycast can hit object increase awareness
-                    if (Physics.Raycast(go.transform.position, (potentialTarget[i].transform.position - transform.position), out hitInfo, stats.viewDistance, layerMask))
-                    {
-                        stats.awarenessAmount += stats.awarenessRise / dist * ((float)stats.awareness + 1);
-
-                    }
-                }
-
+                stats.awarenessAmount += stats.awarenessRise;
             }
+                
+
         }
+        
 
         //if spotted return sucess
         if (stats.awareness == EnemyStats.Awareness.SPOTTED)
@@ -85,7 +78,8 @@ public class DetectionNode : Node
                       Mathf.Pow(y2 - y1, 2) * 1.0f);
     }
 
-    public void SetTarget(List<GameObject> _target)
+    //sets NPC target
+    public void SetTarget(GameObject _target)
     {
         potentialTarget = _target;
     }

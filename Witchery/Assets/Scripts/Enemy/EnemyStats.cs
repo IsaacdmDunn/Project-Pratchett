@@ -15,12 +15,14 @@ public class EnemyStats : Stats
     public float awarenessAmount = 0f;
     public Awareness awareness = Awareness.NORMAL;
     public bool traumatized = false;
+    public bool angry = false;
 
     [SerializeField] OnHit onHit;
     public ResourceManager resourceManager;
 
     public string BT = "None"; 
-    public string Speech = "None"; 
+    public string Speech = "None";
+    public bool actionComplete = false;
 
     public enum Awareness
     {
@@ -35,6 +37,7 @@ public class EnemyStats : Stats
         SetAwareness();
         UpdateHunger();
 
+        //if NPC been hit
         if (onHit.isHit)
         {
             onHit.isHit = false;
@@ -42,6 +45,8 @@ public class EnemyStats : Stats
             traumatized = true;
             
         }
+
+        //if NPC loses all health
         if (health < 0f)
         {
             this.gameObject.transform.position = new Vector3(100000f, 1000000, 100000);

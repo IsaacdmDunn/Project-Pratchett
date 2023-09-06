@@ -28,7 +28,7 @@ public class WalkNode : Node
         {
             stats.Speech = "Heading over there";
             stats.BT = "Walking";
-
+            
             return NodeState.success;
             
         }

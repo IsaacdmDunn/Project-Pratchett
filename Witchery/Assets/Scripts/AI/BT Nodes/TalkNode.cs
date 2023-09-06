@@ -24,8 +24,10 @@ public class TalkNode : Node
         //if at target return sucess
         if (agent.remainingDistance < 10)
         {
-            stats.Speech = "Hi how are you";
+            //talk to NPC
+            stats.Speech = "Hi how are you " + target.gameObject.name;
             stats.BT = "Talking";
+            stats.actionComplete = true;
             return NodeState.success;
             
         }

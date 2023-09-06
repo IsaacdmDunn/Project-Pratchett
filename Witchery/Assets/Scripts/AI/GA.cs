@@ -27,14 +27,12 @@ public class GA : MonoBehaviour
     //causes mutation in genome
     public void Mutation()
     {
-        
+        int ran = Random.Range(0, mutationRate + 1);
+        //check each gene in genome
         for (int i = 0; i < genome.Count; i++)
         {
-            if (genome[i].GetType() == typeof(Sequence))
-            {
-                Debug.Log("yes");
-            }
-            int ran = Random.Range(0, mutationRate + 1);
+            //chance to swap randome gene out
+            ran = Random.Range(0, mutationRate + 1);
             if (ran == mutationRate)
             {
                 int mutationGeneID = Random.Range(0, NodeList.Count);
@@ -44,9 +42,10 @@ public class GA : MonoBehaviour
         }
 
         //add or remove behaviours
-        int ran2 = Random.Range(0, mutationRate + 1);
-        if (ran2 == mutationRate)
+        ran = Random.Range(0, mutationRate + 1);
+        if (ran == mutationRate)
         {
+            //randomly chooses to add or remove genes from genome
             int mutationGeneID = Random.Range(0, NodeList.Count);
             int or = Random.Range(0, 2);
             switch (or)
@@ -63,14 +62,18 @@ public class GA : MonoBehaviour
         }
     }
 
+    //adds new gene within composite nodes
     void AddGene(int i, List<Node> list)
     {
+        //increase behavaviour tree search depth
         treeDepth++;
+
+        //add node in composite
         int nodeID = Random.Range(0, NodeList.Count);
         list.Add(NodeList[nodeID]);
-        Debug.Log(nodeID);
         if (list[i].GetType() == typeof(Sequence) || list[i].GetType() == typeof(Selector))
         {
+            //seach child nodes
             int i2 = 0;
             while (i2 < Random.Range(0, 5) && treeDepth < maxTreeDepth)
             {
@@ -81,26 +84,4 @@ public class GA : MonoBehaviour
             
         }
     }
-
-
-    void RemoveGene(int i, List<Node> list)
-    {
-        treeDepth++;
-        int nodeID = Random.Range(0, NodeList.Count);
-        list.Add(NodeList[nodeID]);
-
-        if (list[i].GetType() == typeof(Sequence) || list[i].GetType() == typeof(Selector))
-        {
-            int i2 = 0;
-            while (i2 < Random.Range(0, 5) && treeDepth < maxTreeDepth)
-            {
-                Debug.Log(treeDepth + " " + i2);
-                AddGene(i2, list[i].nodes);
-                i2++;
-            }
-
-        }
-    }
-
-    
 }

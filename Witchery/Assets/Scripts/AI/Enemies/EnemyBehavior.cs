@@ -23,7 +23,8 @@ public class EnemyBehavior : MonoBehaviour
     public WalkNode walkToTarget = null;
     public TalkNode talkToTarget = null;
     public AttackNode attackTarget = null;
-
+    
+    //flee behaviour
     public FleeNode flee = null;
 
     public List<GameObject> potentialTargetCharacters;
@@ -35,25 +36,26 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] EnemyStats stats;
     int layerMask = 1 << 6;
-
+    int targetID = 0;
     Animator animator;
 
-    public int timer = 600;
-
+    public int timer = 1200;
+    
+    //on start 
     void Awake()
     {
         
         animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
 
-        List<GameObject> npcs = resourceManager.GetNPCs();
+        List<GameObject> npcs = resourceManager.GetEnemies();
         foreach (GameObject npc in npcs)
         {
-            if(npc.tag == "MainNPC")
-            {
-                potentialTargetCharacters.Add(npc);
-            }
+            potentialTargetCharacters.Add(npc);
         }
-        potentialTargetCharacters.Add(resourceManager.GetPlayer());
+        targetID = Random.RandomRange(0, potentialTargetCharacters.Count);
+        targetCharacter = potentialTargetCharacters[targetID];
+        //Debug.Log(targetCharacter.name);
+        //potentialTargetCharacters.Add(resourceManager.GetPlayer());
         GetClosestCharacter();
         GetClosestFood();
         agent = GetComponent<NavMeshAgent>();
@@ -63,6 +65,7 @@ public class EnemyBehavior : MonoBehaviour
         ConstructBT();
         ga.initGenome();
 
+        
         stats.resourceManager = resourceManager;
     }
 
@@ -81,7 +84,7 @@ public class EnemyBehavior : MonoBehaviour
         
 
         //attacking behavior
-        searchForPlayer = new DetectionNode(this.transform, stats, layerMask, resourceManager.GetNPCs(), resourceManager.GetPlayer());
+        searchForPlayer = new DetectionNode(this.transform, stats, layerMask, resourceManager.GetEnemies(), resourceManager.GetPlayer());
         walkToTarget = new WalkNode(animator, agent, targetCharacter.transform, stats); //targets player for now
         talkToTarget = new TalkNode(animator, agent, targetCharacter.transform, stats); //targets player for now
         attackTarget = new AttackNode(animator, stats);
@@ -91,23 +94,34 @@ public class EnemyBehavior : MonoBehaviour
         ga.NodeList.Add(idle);
         ga.NodeList.Add(flee);
         ga.NodeList.Add(eatingSQC);
-        ga.NodeList.Add(idle);
+        ga.NodeList.Add(talkToTarget);
         //starting node in BT
-        //topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
+        topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
 
 
 
-        topNode = new Selector(ga.genome);
+        //topNode = new Selector(ga.genome);
 
     }
 
     //NEED BETTER WAY --- DONT CALL EVERY UPDATE
     private void FixedUpdate()
     {
+        
+        timer--;
+        if(timer < 0)
+        {
+            targetID = Random.RandomRange(0, potentialTargetCharacters.Count);
+            timer = 1200;
+        }
+        targetCharacter = potentialTargetCharacters[targetID];
+        //Debug.Log(targetCharacter.gameObject.name);
         walkToFood.SetTarget(targetFood.transform);
         walkToTarget.SetTarget(targetCharacter.transform);
+
+        talkToTarget.SetTarget(targetCharacter.transform);
         eat.SetTarget(targetFood.gameObject);
-        searchForPlayer.SetTarget(potentialTargetCharacters);
+        searchForPlayer.SetTarget(targetCharacter);
         GetClosestCharacter();
         GetClosestFood();
         topNode.Evaluate();
@@ -124,15 +138,12 @@ public class EnemyBehavior : MonoBehaviour
 
     void GetClosestCharacter()
     {
-        List<GameObject> npcs = resourceManager.GetNPCs();
+        List<GameObject> npcs = resourceManager.GetEnemies();
         foreach (GameObject npc in npcs)
         {
-            if (npc.tag == "MainNPC")
-            {
-                potentialTargetCharacters.Add(npc);
-            }
+            //potentialTargetCharacters.Add(npc);
         }
-
+        //potentialTargetCharacters.Add(resourceManager.GetPlayer());
         float dist;
         float bestDistance = 100000;
         foreach (GameObject character in potentialTargetCharacters)
@@ -167,9 +178,12 @@ public class EnemyBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == targetCharacter.tag)
+        if (other.tag == targetCharacter.tag && targetCharacter.GetComponent<EnemyStats>().angry)
         {
-            targetCharacter.GetComponent<Stats>().TakeDamage(5);
+            //targetCharacter.GetComponent<Stats>().TakeDamage(5);
+            targetCharacter.GetComponent<EnemyStats>().angry = false;
+            other.GetComponent<EnemyStats>().awarenessAmount = 0;
+            stats.traumatized = true;
         }
     }
 }

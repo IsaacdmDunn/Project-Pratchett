@@ -22,11 +22,8 @@ public class FleeNode : Node
 
     public override NodeState Evaluate()
     {
+        //gets distance
         float distance = Vector3.Distance(agent.transform.position, target.transform.position);
-
-       
-
-        
         
         //if at target return sucess
         if (distance < 10)
@@ -47,8 +44,5 @@ public class FleeNode : Node
         
     }
 
-    public void SetTarget(Transform _target)
-    {
-        target = _target;
-    }
+  
 }
