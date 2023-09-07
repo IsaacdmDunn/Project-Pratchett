@@ -30,7 +30,7 @@ public class EnemyBehavior : MonoBehaviour
     public List<GameObject> potentialTargetCharacters;
 
     //Reference knowledge
-    [SerializeField] ResourceManager resourceManager;
+    [SerializeField] public ResourceManager resourceManager;
     GameObject targetCharacter = null;
     GameObject targetFood = null;
     [SerializeField] NavMeshAgent agent;
@@ -44,7 +44,6 @@ public class EnemyBehavior : MonoBehaviour
     //on start 
     void Awake()
     {
-        
         animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
 
         List<GameObject> npcs = resourceManager.GetEnemies();
@@ -96,18 +95,18 @@ public class EnemyBehavior : MonoBehaviour
         ga.NodeList.Add(eatingSQC);
         ga.NodeList.Add(talkToTarget);
         //starting node in BT
-        topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
+        //topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
 
 
 
-        //topNode = new Selector(ga.genome);
+        topNode = new Selector(ga.genome);
 
     }
 
     //NEED BETTER WAY --- DONT CALL EVERY UPDATE
     private void FixedUpdate()
     {
-        
+        topNode = new Selector(ga.genome);
         timer--;
         if(timer < 0)
         {
@@ -122,6 +121,7 @@ public class EnemyBehavior : MonoBehaviour
         talkToTarget.SetTarget(targetCharacter.transform);
         eat.SetTarget(targetFood.gameObject);
         searchForPlayer.SetTarget(targetCharacter);
+        flee.SetTarget(targetCharacter.transform);
         GetClosestCharacter();
         GetClosestFood();
         topNode.Evaluate();

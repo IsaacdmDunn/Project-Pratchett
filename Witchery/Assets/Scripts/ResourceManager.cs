@@ -15,6 +15,7 @@ public class ResourceManager : MonoBehaviour
     [SerializeField] float activeDistance = 10f;
     [SerializeField] float optimisingDistance = 15f;
     bool updateRequired= false;
+    public List<int> mutationCount = new List<int> { 0,0,0,0,0,0,0,0,0,0};
 
     // Update is called once per frame
     void Update()

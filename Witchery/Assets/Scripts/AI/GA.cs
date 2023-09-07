@@ -16,12 +16,10 @@ public class GA : MonoBehaviour
     //initises genome with behaviours
     public void initGenome()
     {
-        for (int i = 0; i < initGeneCount; i++)
-        {
-            AddGene(i, genome);
-            
-        }
-        treeDepth = 0;
+        //basic starting behaviours orders as attack sequence, eating sequence and idle behaviours
+        genome = new List<Node> { NodeList[0], NodeList[1], NodeList[2] };
+
+        
     }
 
     //causes mutation in genome
@@ -36,8 +34,16 @@ public class GA : MonoBehaviour
             if (ran == mutationRate)
             {
                 int mutationGeneID = Random.Range(0, NodeList.Count);
-                Debug.Log("mutation!");
+                behaviorTree.resourceManager.mutationCount[mutationGeneID] += 1;
+                Debug.Log("mutation! " + mutationGeneID + " mutation count: " + behaviorTree.resourceManager.mutationCount[mutationGeneID]);
                 genome[i] = NodeList[mutationGeneID];
+            }
+
+            ran = Random.Range(0, mutationRate + 1);
+            if (ran == mutationRate)
+            {
+                AddGene(i, genome);
+                treeDepth = 0;
             }
         }
 
@@ -51,7 +57,8 @@ public class GA : MonoBehaviour
             switch (or)
             {
                 case 0:
-                    genome.RemoveAt(Random.Range(0, genome.Count));
+                    int rand = Random.Range(0, genome.Count);
+                    genome.RemoveAt(rand);
                     break;
                 case 1:
                     genome.Insert(Random.Range(0, genome.Count), NodeList[mutationGeneID]);

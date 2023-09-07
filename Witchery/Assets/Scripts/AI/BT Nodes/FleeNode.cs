@@ -44,5 +44,10 @@ public class FleeNode : Node
         
     }
 
-  
+    //sets target
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
+
 }

@@ -1,19 +1,20 @@
 event system -- if attacked or other person talks trigger mutation
 
+npcs need to talk/attack each other
 need resource system to use all NPCs
 rename classes and objects and comment
 
 
-finish intro fix issues from rubric -today/tomorrow needs 300 words
-extra research 1000 words
+extra research 500-1000 words
 analysis of problem 100-600 words
-research onion - today/tomorrow - done
-artefact design 1500 words
-artefact implementation, testing, validation 1500
-
+artefact design 800 words
+artefact implementation, testing, validation 1000 words
 evaluation 1500 words
 conclusion/ future work 700 words
+
+total 5000 words max 4000 words min
 
 presentation
 
 
+viva questions
