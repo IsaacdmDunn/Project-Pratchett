@@ -5,8 +5,8 @@ need resource system to use all NPCs
 rename classes and objects and comment
 
 
-extra research 500-1000 words
-analysis of problem 100-600 words
+extra research  - done
+analysis of problem -done
 artefact design 800 words
 artefact implementation, testing, validation 1000 words
 evaluation 1500 words
@@ -18,3 +18,41 @@ presentation
 
 
 viva questions
+
+
+
+
+
+
+
+
+Atkinson, T. et al. (2019) ‘The text-based adventure AI competition’, IEEE Transactions on Games, 11(3), pp. 260–266. doi:10.1109/tg.2019.2896017. 
+Barriga, N.A. et al. (2019) ‘Improving RTS game AI by supervised policy learning, tactical search, and deep reinforcement learning’, IEEE Computational Intelligence Magazine, 14(3), pp. 8–18. doi:10.1109/mci.2019.2919363. 
+Bosser, A.-G. et al. (2007) ‘Dialogs taking into account experience, emotions and personality’, Proceedings of the 2nd international conference on Digital interactive media in entertainment and arts [Preprint]. doi:10.1145/1306813.1306823. 
+Carstensdottir, E., Kleinman, E. and El-Nasr, M.S. (2019) ‘Player interaction in narrative games’, Proceedings of the 14th International Conference on the Foundations of Digital Games [Preprint]. doi:10.1145/3337722.3337730. 
+de Lima, E.S., Feijó, B. and Furtado, A.L. (2018) ‘Player behavior and personality modeling for interactive storytelling in games’, Entertainment Computing, 28, pp. 32–48. doi:10.1016/j.entcom.2018.08.003. 
+Feng, S. et al. (2020) ‘A collaborative decision making approach for multi-unmanned combat vehicles based on the behaviour tree’, 2020 3rd International Conference on Unmanned Systems (ICUS) [Preprint]. doi:10.1109/icus50048.2020.9275007. 
+Kreminski, M. et al. (2020) ‘Why are we like this?: The Ai Architecture of a co-creative storytelling game’, International Conference on the Foundations of Digital Games [Preprint]. doi:10.1145/3402942.3402953. 
+Matthews, G. et al. (2021) ‘Evolution and revolution: Personality research for the coming world of robots, Artificial Intelligence, and Autonomous Systems’, Personality and Individual Differences, 169, p. 109969. doi:10.1016/j.paid.2020.109969. 
+Postnikov, E.V. et al. (2019) ‘Application of fuzzy state machines to control players in virtual soccer simulation’, 2019 IEEE Conference of Russian Young Researchers in Electrical and Electronic Engineering (EIConRus) [Preprint]. doi:10.1109/eiconrus.2019.8657109. 
+Spraragen, M. and Madni, A.M. (2014) ‘Modeling of emotional effects on decision-making by Game Agents’, Procedia Computer Science, 28, pp. 736–743. doi:10.1016/j.procs.2014.03.088. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.youtube.com/watch?v=N-Oj4i56iQY&ab_channel=DangoheartAnimation
