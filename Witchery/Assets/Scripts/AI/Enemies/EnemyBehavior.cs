@@ -92,8 +92,8 @@ public class EnemyBehavior : MonoBehaviour
         ga.NodeList.Add(eatingSQC);
         ga.NodeList.Add(idle);
         ga.NodeList.Add(flee);
-        ga.NodeList.Add(eatingSQC);
         ga.NodeList.Add(talkToTarget);
+        ga.NodeList.Add(walkToTarget);
         //starting node in BT
         //topNode = new Selector(new List<Node> { attackingSQC, eatingSQC, idle});
 
