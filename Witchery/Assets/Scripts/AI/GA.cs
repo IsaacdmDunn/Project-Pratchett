@@ -7,7 +7,7 @@ public class GA : MonoBehaviour
     public List<Node> genome = new List<Node>(); 
     public int mutationRate = 10;
     public int initGeneCount = 5;
-    public EnemyBehavior behaviorTree;
+    public BehaviourTree behaviorTree;
     int treeDepth;
     int maxTreeDepth = 4;
     public List<Node> NodeList = new List<Node>();

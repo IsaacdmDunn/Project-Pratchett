@@ -51,9 +51,9 @@ public class EnemyStats : Stats
         {
             this.gameObject.transform.position = new Vector3(100000f, 1000000, 100000);
             health = 1f;
-            foreach (GameObject npc in resourceManager.GetEnemies())
+            foreach (GameObject npc in resourceManager.GetNPCs())
             {
-                npc.GetComponent<EnemyBehavior>().ga.Mutation();
+                npc.GetComponent<BehaviourTree>().ga.Mutation();
             }
 
         }

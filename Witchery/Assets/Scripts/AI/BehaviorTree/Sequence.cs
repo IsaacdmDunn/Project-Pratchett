@@ -5,32 +5,40 @@ using UnityEngine;
 public class Sequence : Node
 {
     protected List<Node> nodes = new List<Node>();
+
     public Sequence(List<Node> nodes)
     {
         this.nodes = nodes;
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
         bool nodeRunning = false;
-        foreach (var node in nodes)
+        foreach (Node node in nodes)
         {
-            switch (node.Evaluate())
+            switch (node.RunBehaviour())
             {
-                case NodeState.running:
+                case NodeStatus.running:
                     nodeRunning = true;
                     break;
-                case NodeState.success:
+                case NodeStatus.success:
                     break;
-                case NodeState.failure:
-                    nodeState = NodeState.failure;
+                case NodeStatus.failure:
+                    nodeState = NodeStatus.failure;
                     return nodeState;
                     break;
                 default:
                     break;
             }
         }
-        nodeState = nodeRunning ? NodeState.running : NodeState.success;
+        if (nodeRunning)
+        {
+            nodeState = NodeStatus.running;
+        }
+        else
+        {
+            nodeState = NodeStatus.success;
+        }
         return nodeState;
     }
 

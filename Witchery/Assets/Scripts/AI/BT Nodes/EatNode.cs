@@ -19,7 +19,7 @@ public class EatNode : Node
         animator = _animator;
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
         if (itemToEat != null)
         {
@@ -31,12 +31,12 @@ public class EatNode : Node
                 stats.hungerAmount -= itemToEat.Eat();
 
                 animator.SetTrigger("Eating");
-                return NodeState.success;
+                return NodeStatus.success;
             }
             
         }
         
-        return NodeState.failure; //behavior failed
+        return NodeStatus.failure; //behavior failed
     }
 
     public void SetTarget(GameObject _targetFood)

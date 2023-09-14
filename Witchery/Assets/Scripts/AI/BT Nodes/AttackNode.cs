@@ -12,7 +12,7 @@ public class AttackNode : Node
         stats = _stats;
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
 
         //allows NPC attack collision to function
@@ -21,6 +21,6 @@ public class AttackNode : Node
         stats.BT = "Atacking";
         stats.actionComplete = true;
         stats.angry = true;
-        return NodeState.success;
+        return NodeStatus.success;
     }
 }

@@ -8,11 +8,12 @@ rename classes and objects and comment
 extra research  - done
 analysis of problem -done
 artefact design 500 words
-artefact implementation, testing, validation 500 words
-evaluation 700 words
-conclusion/ future work 700 words
+artefact implementation, testing, validation 700 words
+evaluation - done
+conclusion/ future work 50 words
 
-total 2400 words max 2000 words min
+total 1200 words left
+400 min 2400 max
 
 presentation
 

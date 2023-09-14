@@ -19,7 +19,7 @@ public class WalkNode : Node
         stats = _stats;
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
         //walk to target 
         agent.SetDestination(target.position);
@@ -29,11 +29,11 @@ public class WalkNode : Node
             stats.Speech = "Heading over there";
             stats.BT = "Walking";
             
-            return NodeState.success;
+            return NodeStatus.success;
             
         }
         animator.SetTrigger("Moving");
-        return NodeState.running;
+        return NodeStatus.running;
         
     }
 

@@ -18,7 +18,7 @@ public class IdleNode : Node
         RandomPosition();
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
         animator.SetTrigger("Moving");
         //countdown timer before targer position change
@@ -31,7 +31,7 @@ public class IdleNode : Node
         //if not at destination fail
         if (agent.remainingDistance > 0)
         {
-            return NodeState.failure;
+            return NodeStatus.failure;
         }
 
         //set destination
@@ -40,7 +40,7 @@ public class IdleNode : Node
         stats.Speech = "I'm just wandering";
         stats.BT = "Idle";
 
-        return NodeState.success;
+        return NodeStatus.success;
     }
 
     //select random position

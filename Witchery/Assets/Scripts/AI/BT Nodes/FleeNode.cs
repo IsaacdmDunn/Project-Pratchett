@@ -20,7 +20,7 @@ public class FleeNode : Node
         
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
         //gets distance
         float distance = Vector3.Distance(agent.transform.position, target.transform.position);
@@ -36,11 +36,11 @@ public class FleeNode : Node
             stats.Speech = "I gotta get out of here!";
             stats.BT = "Flee";
 
-            return NodeState.success;
+            return NodeStatus.success;
             
         }
         animator.SetTrigger("Moving");
-        return NodeState.running;
+        return NodeStatus.running;
         
     }
 

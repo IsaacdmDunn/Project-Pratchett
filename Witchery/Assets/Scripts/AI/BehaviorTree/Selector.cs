@@ -10,27 +10,27 @@ public class Selector : Node
         this.nodes = nodes;
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
-        foreach (var node in nodes)
+        foreach (Node node in nodes)
         {
-            switch (node.Evaluate())
+            switch (node.RunBehaviour())
             {
-                case NodeState.running:
-                    nodeState = NodeState.running;
+                case NodeStatus.running:
+                    nodeState = NodeStatus.running;
                     return nodeState;
                     break;
-                case NodeState.success:
-                    nodeState = NodeState.success;
+                case NodeStatus.success:
+                    nodeState = NodeStatus.success;
                     return nodeState;
                     break;
-                case NodeState.failure:
+                case NodeStatus.failure:
                     break;
                 default:
                     break;
             }
         }
-        nodeState = NodeState.failure;
+        nodeState = NodeStatus.failure;
         return nodeState;
     }
 

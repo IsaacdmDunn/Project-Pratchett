@@ -5,14 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Node
 {
-    public NodeState nodeState;
-    public NodeState GetNodeState { get { return nodeState; } }
-    public abstract NodeState Evaluate();
-    public enum NodeState
+    public enum NodeStatus
     {
         running, success, failure
     }
 
-    public int NodeID = -1;
+    public NodeStatus nodeState;
+    public abstract NodeStatus RunBehaviour();
+    public NodeStatus GetNodeState { get { return nodeState; } }
     public List<Node> nodes = new List<Node>();
 }

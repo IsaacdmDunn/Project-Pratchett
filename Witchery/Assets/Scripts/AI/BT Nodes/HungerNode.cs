@@ -10,7 +10,7 @@ public class HungerNode : Node
         stats = _stats;
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
         //if hungry return sucess
         if (stats.hungerAmount > stats.hungerThreshold)
@@ -18,8 +18,8 @@ public class HungerNode : Node
             stats.Speech = "I'm hungry";
             stats.BT = "Hungry";
 
-            return NodeState.success;
+            return NodeStatus.success;
         }
-        return NodeState.failure;
+        return NodeStatus.failure;
     }
 }

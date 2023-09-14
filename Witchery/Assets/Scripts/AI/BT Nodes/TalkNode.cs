@@ -19,7 +19,7 @@ public class TalkNode : Node
         stats = _stats;
     }
 
-    public override NodeState Evaluate()
+    public override NodeStatus RunBehaviour()
     {
         //if at target return sucess
         if (agent.remainingDistance < 10)
@@ -28,11 +28,11 @@ public class TalkNode : Node
             stats.Speech = "Hi how are you " + target.gameObject.name;
             stats.BT = "Talking";
             stats.actionComplete = true;
-            return NodeState.success;
+            return NodeStatus.success;
             
         }
         animator.SetTrigger("Moving");
-        return NodeState.running;
+        return NodeStatus.running;
         
     }
 
