@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//node for eating
 public class EatNode : Node
 {
     GameObject targetFood;
     NavMeshAgent agent;
     ItemPickup itemToEat;
-    EnemyStats stats;
+    NPCStats stats;
     Animator animator;
-    public EatNode(Animator _animator, NavMeshAgent _agent, GameObject _targetFood, EnemyStats _stats)
+
+    //constructor
+    public EatNode(Animator _animator, NavMeshAgent _agent, GameObject _targetFood, NPCStats _stats)
     {
         targetFood = _targetFood;
         
@@ -19,12 +22,12 @@ public class EatNode : Node
         animator = _animator;
     }
 
+    //runs beahviour
     public override NodeStatus RunBehaviour()
     {
+        //if food is edible
         if (itemToEat != null)
         {
-
-
             //if nearby item and its foragable then eat and return sucess
             if (itemToEat.foragable && agent.remainingDistance < 0.3f)
             {
@@ -35,10 +38,11 @@ public class EatNode : Node
             }
             
         }
-        
-        return NodeStatus.failure; //behavior failed
+        //food was not eaten return fail
+        return NodeStatus.failure; 
     }
 
+    //sets new food target
     public void SetTarget(GameObject _targetFood)
     {
         itemToEat = targetFood.gameObject.GetComponent<ItemPickup>();

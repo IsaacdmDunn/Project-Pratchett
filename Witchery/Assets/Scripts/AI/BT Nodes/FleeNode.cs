@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//behaviour for running away
 public class FleeNode : Node
 {
     Transform target;
     NavMeshAgent agent;
     Animator animator;
-    EnemyStats stats;
+    NPCStats stats;
 
-
-    public FleeNode(Animator _animator, NavMeshAgent _agent, Transform _target, EnemyStats _stats)
+    //constructor
+    public FleeNode(Animator _animator, NavMeshAgent _agent, Transform _target, NPCStats _stats)
     {
         agent = _agent;
         target = _target;
@@ -20,6 +21,7 @@ public class FleeNode : Node
         
     }
 
+    //runs behaviour
     public override NodeStatus RunBehaviour()
     {
         //gets distance
@@ -33,18 +35,21 @@ public class FleeNode : Node
             Vector3 newpos = agent.transform.position + dirToPlayer;
             agent.SetDestination(newpos);
 
+            //set current behaviour for UI
             stats.Speech = "I gotta get out of here!";
             stats.BT = "Flee";
+
 
             return NodeStatus.success;
             
         }
+        //else continue running behaviour
         animator.SetTrigger("Moving");
         return NodeStatus.running;
         
     }
 
-    //sets target
+    //sets new target
     public void SetTarget(Transform _target)
     {
         target = _target;

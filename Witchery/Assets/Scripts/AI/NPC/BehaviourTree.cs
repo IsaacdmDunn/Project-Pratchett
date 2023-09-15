@@ -21,31 +21,34 @@ public class BehaviourTree : MonoBehaviour
     public Sequence attackingSQC = null;
     public DetectionNode searchForPlayer = null;
     public WalkNode walkToTarget = null;
-    public TalkNode talkToTarget = null;
     public AttackNode attackTarget = null;
     
     //flee behaviour
     public FleeNode flee = null;
 
-    public List<GameObject> potentialTargetCharacters;
+    //social behaviour
+    public TalkNode talkToTarget = null;
+
 
     //Reference knowledge
     [SerializeField] public ResourceManager resourceManager;
+    public List<GameObject> potentialTargetCharacters;
     GameObject targetCharacter = null;
     GameObject targetFood = null;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] EnemyStats stats;
+    [SerializeField] NPCStats stats;
     int layerMask = 1 << 6;
     int targetID = 0;
     Animator animator;
-
     public int timer = 1200;
     
     //on start 
     void Awake()
     {
         animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
+        stats.resourceManager = resourceManager;
 
+        //creates list of possible target NPCs and picks random initial target
         List<GameObject> npcs = resourceManager.GetNPCs();
         foreach (GameObject npc in npcs)
         {
@@ -53,27 +56,28 @@ public class BehaviourTree : MonoBehaviour
         }
         targetID = Random.RandomRange(0, potentialTargetCharacters.Count);
         targetCharacter = potentialTargetCharacters[targetID];
-        //Debug.Log(targetCharacter.name);
-        //potentialTargetCharacters.Add(resourceManager.GetPlayer());
-        GetClosestCharacter();
+
+        //sets food target
         GetClosestFood();
+
+        //gets AI nav mesh
         agent = GetComponent<NavMeshAgent>();
+
+        //creates and initises new adaptive behavour tree
         ga = new GA();
         ga.behaviorTree = this;
-        
         ConstructBT();
         ga.initGenome();
 
         
-        stats.resourceManager = resourceManager;
     }
 
+    //create behaviour tree
     void ConstructBT()
     {
         //idle behavior
         idle = new IdleNode(animator, agent, stats);
         
-
         //eating behavior
         hunger = new HungerNode(stats);
         flee = new FleeNode(animator, agent, targetCharacter.transform, stats);
@@ -85,9 +89,13 @@ public class BehaviourTree : MonoBehaviour
         //attacking behavior
         searchForPlayer = new DetectionNode(this.transform, stats, layerMask, targetCharacter);
         walkToTarget = new WalkNode(animator, agent, targetCharacter.transform, stats); 
-        talkToTarget = new TalkNode(animator, agent, targetCharacter.transform, stats); 
         attackTarget = new AttackNode(animator, stats);
         attackingSQC = new Sequence(new List<Node> {searchForPlayer, walkToTarget, attackTarget});
+
+        //talking behaviour
+        talkToTarget = new TalkNode(animator, agent, targetCharacter.transform, stats);
+
+        //creates new list of usable genes
         ga.NodeList.Add(attackingSQC);
         ga.NodeList.Add(eatingSQC);
         ga.NodeList.Add(idle);
@@ -95,24 +103,17 @@ public class BehaviourTree : MonoBehaviour
         ga.NodeList.Add(talkToTarget);
         ga.NodeList.Add(walkToTarget);
 
-
-
+        //sets behaviours in tree to genome data
         topNode = new Selector(ga.genome);
 
     }
 
-    //NEED BETTER WAY --- DONT CALL EVERY UPDATE
+    // update call every frame
     private void FixedUpdate()
     {
-        topNode = new Selector(ga.genome);
-        timer--;
-        if(timer < 0)
-        {
-            targetID = Random.RandomRange(0, potentialTargetCharacters.Count);
-            timer = 1200;
-        }
-        targetCharacter = potentialTargetCharacters[targetID];
-        //Debug.Log(targetCharacter.gameObject.name);
+        SetTargetCharacter(); 
+
+        //resets the target charactor/ food for beahviours
         walkToFood.SetTarget(targetFood.transform);
         walkToTarget.SetTarget(targetCharacter.transform);
 
@@ -120,41 +121,34 @@ public class BehaviourTree : MonoBehaviour
         eat.SetTarget(targetFood.gameObject);
         searchForPlayer.SetTarget(targetCharacter);
         flee.SetTarget(targetCharacter.transform);
-        GetClosestCharacter();
         GetClosestFood();
-        topNode.RunBehaviour();
 
+        //if NPC is tramatised then start mutation
         if (stats.traumatized)
         {
             ga.Mutation();
             stats.traumatized = false;
         }
 
-        
-        
+        //recreate tree with updated behaviours
+        topNode = new Selector(ga.genome);
+        topNode.RunBehaviour();
+
     }
 
-    void GetClosestCharacter()
+    //gets a random target character
+    void SetTargetCharacter()
     {
-        List<GameObject> npcs = resourceManager.GetNPCs();
-        foreach (GameObject npc in npcs)
+        timer--;
+        if (timer < 0)
         {
-            //potentialTargetCharacters.Add(npc);
+            targetID = Random.RandomRange(0, potentialTargetCharacters.Count);
+            timer = 1200;
         }
-        //potentialTargetCharacters.Add(resourceManager.GetPlayer());
-        float dist;
-        float bestDistance = 100000;
-        foreach (GameObject character in potentialTargetCharacters)
-        {
-            dist = Vector3.Distance(character.transform.position, this.gameObject.transform.position);
-            if (dist < bestDistance)
-            {
-                bestDistance = dist;
-                targetCharacter = character;
-            }
-        }
+        targetCharacter = potentialTargetCharacters[targetID];
     }
 
+    //gets closes food using distance
     void GetClosestFood()
     {
         float dist;
@@ -174,13 +168,13 @@ public class BehaviourTree : MonoBehaviour
         }
     }
 
+    //if attacking NPC collides with this NPC then NPC is traumatised 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == targetCharacter.tag && targetCharacter.GetComponent<EnemyStats>().angry)
+        if (other.tag == targetCharacter.tag && targetCharacter.GetComponent<NPCStats>().angry)
         {
-            //targetCharacter.GetComponent<Stats>().TakeDamage(5);
-            targetCharacter.GetComponent<EnemyStats>().angry = false;
-            other.GetComponent<EnemyStats>().awarenessAmount = 0;
+            targetCharacter.GetComponent<NPCStats>().angry = false;
+            other.GetComponent<NPCStats>().awarenessAmount = 0;
             stats.traumatized = true;
         }
     }

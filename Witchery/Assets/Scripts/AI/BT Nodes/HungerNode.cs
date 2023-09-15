@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//node for how hungry the NPC is
 public class HungerNode : Node
 {
-    EnemyStats stats;
-    public HungerNode(EnemyStats _stats)
+    NPCStats stats;
+
+    //constructor
+    public HungerNode(NPCStats _stats)
     {
         stats = _stats;
     }
@@ -20,6 +23,7 @@ public class HungerNode : Node
 
             return NodeStatus.success;
         }
+        //if not hungry then fail node
         return NodeStatus.failure;
     }
 }

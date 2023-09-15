@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//node for finding objects
 public class DetectionNode : Node
 {
     Transform transform;
     GameObject potentialTarget;
-    EnemyStats stats;
+    NPCStats stats;
     float FOV = 270f; 
     int layerMask;
 
     RaycastHit hitInfo;
     GameObject go = new GameObject();
-    public DetectionNode(Transform _transform, EnemyStats _stats, int _layerMask, 
+
+    //constructor
+    public DetectionNode(Transform _transform, NPCStats _stats, int _layerMask, 
         GameObject target)
     {
         transform = _transform;
@@ -22,6 +25,7 @@ public class DetectionNode : Node
         layerMask = ~layerMask;
     }
 
+    //runs behaviour
     public override NodeStatus RunBehaviour()
     {
         //create copy of tranform to keep raycast above ground
@@ -32,10 +36,7 @@ public class DetectionNode : Node
         //get y angle of agent
         float offset = transform.localEulerAngles.y;
 
-        
-
-        
-         //checks if detection target is in view range
+        //checks if detection target is in view range using angles and distance to create cone of vision
         float dist = Distance(transform.position.x, transform.position.z, potentialTarget.transform.position.x, potentialTarget.transform.position.z);
         if (dist < stats.viewDistance)
         {
@@ -47,16 +48,15 @@ public class DetectionNode : Node
 
         }
         
-
         //if spotted return sucess
-        if (stats.awareness == EnemyStats.Awareness.SPOTTED)
+        if (stats.awareness == NPCStats.Awareness.SPOTTED)
         {
             stats.Speech = "I see something";
             stats.BT = "Detection";
             return NodeStatus.success;
         }
         //return sucess to get AI to move to location NEEDS IMPROVEMENT
-        else if (stats.awareness == EnemyStats.Awareness.AWARE || stats.awareness == EnemyStats.Awareness.SUSPICIOUS)
+        else if (stats.awareness == NPCStats.Awareness.AWARE || stats.awareness == NPCStats.Awareness.SUSPICIOUS)
         {
             stats.Speech = "I think see something";
             stats.BT = "Detection";
@@ -67,8 +67,6 @@ public class DetectionNode : Node
         {
             return NodeStatus.failure;
         }
-
-        
     }
     //gets distance between 2 objects
     static float Distance(float x1, float y1, float x2, float y2)

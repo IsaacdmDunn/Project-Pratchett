@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//genetic algorithm
 public class GA : MonoBehaviour
 {
     public List<Node> genome = new List<Node>(); 
@@ -22,6 +23,29 @@ public class GA : MonoBehaviour
         
     }
 
+    //adds new gene within composite nodes
+    void AddGene(int i, List<Node> list)
+    {
+        //increase behavaviour tree search depth
+        treeDepth++;
+
+        //add node in composite
+        int nodeID = Random.Range(0, NodeList.Count);
+        list.Add(NodeList[nodeID]);
+        if (list[i].GetType() == typeof(Sequence) || list[i].GetType() == typeof(Selector))
+        {
+            //seach child nodes with in tree depth limit
+            int i2 = 0;
+            while (i2 < Random.Range(0, 5) && treeDepth < maxTreeDepth)
+            {
+                //recursive add gene
+                AddGene(i2, list[i].nodes);
+                i2++;
+            }
+
+        }
+    }
+
     //causes mutation in genome
     public void Mutation()
     {
@@ -39,6 +63,7 @@ public class GA : MonoBehaviour
                 genome[i] = NodeList[mutationGeneID];
             }
 
+            //chance to swap gene in depth
             ran = Random.Range(0, mutationRate + 1);
             if (ran == mutationRate)
             {
@@ -64,31 +89,8 @@ public class GA : MonoBehaviour
                     genome.Insert(Random.Range(0, genome.Count), NodeList[mutationGeneID]);
                     break;
             }
-            
-            
         }
     }
 
-    //adds new gene within composite nodes
-    void AddGene(int i, List<Node> list)
-    {
-        //increase behavaviour tree search depth
-        treeDepth++;
-
-        //add node in composite
-        int nodeID = Random.Range(0, NodeList.Count);
-        list.Add(NodeList[nodeID]);
-        if (list[i].GetType() == typeof(Sequence) || list[i].GetType() == typeof(Selector))
-        {
-            //seach child nodes
-            int i2 = 0;
-            while (i2 < Random.Range(0, 5) && treeDepth < maxTreeDepth)
-            {
-                
-                AddGene(i2, list[i].nodes);
-                i2++;
-            } 
-            
-        }
-    }
+    
 }

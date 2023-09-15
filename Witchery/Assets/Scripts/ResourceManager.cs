@@ -8,43 +8,25 @@ public class ResourceManager : MonoBehaviour
     [SerializeField] List<GameObject> Enviroment;
     [SerializeField] GameObject player;
 
-    bool updateRequired= false;
+
+    //stores mutation count for testing
     public List<int> mutationCount = new List<int> { 0,0,0,0,0,0,0,0,0,0};
 
-    
-
-    private void LateUpdate()
-    {
-        updateRequired = false;
-    }
-
-    
-   
-
-   
-
+    //gets NPC objects
     public List<GameObject> GetNPCs()
     {
         return NPCs;
     }
 
+    //gets enviroment objects
     public List<GameObject> GetEnviroment()
     {
         return Enviroment;
     }
   
+    //gets the player
     public GameObject GetPlayer()
     {
         return player;
-    }
-
-    void SaveArea()
-    {
-
-    }
-
-    void LoadArea()
-    {
-
     }
 }

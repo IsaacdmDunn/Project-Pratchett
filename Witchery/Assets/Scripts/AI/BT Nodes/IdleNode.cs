@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//node for idle behaviour
 public class IdleNode : Node
 {
     Vector3 idleTo;
     float timer;
     NavMeshAgent agent;
     Animator animator;
-    EnemyStats stats;
-    public IdleNode(Animator _animator, NavMeshAgent _agent, EnemyStats _stats)
+    NPCStats stats;
+
+    //constructor
+    public IdleNode(Animator _animator, NavMeshAgent _agent, NPCStats _stats)
     {
         agent = _agent;
         animator = _animator;
@@ -18,6 +21,7 @@ public class IdleNode : Node
         RandomPosition();
     }
 
+    //run behaviour
     public override NodeStatus RunBehaviour()
     {
         animator.SetTrigger("Moving");

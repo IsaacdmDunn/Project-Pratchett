@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//walk node
 public class WalkNode : Node
 {
     Transform target;
     NavMeshAgent agent;
     Animator animator;
-    EnemyStats stats;
+    NPCStats stats;
 
-
-    public WalkNode(Animator _animator, NavMeshAgent _agent, Transform _target, EnemyStats _stats)
+    //contructor
+    public WalkNode(Animator _animator, NavMeshAgent _agent, Transform _target, NPCStats _stats)
     {
         agent = _agent;
         target = _target;
@@ -19,24 +20,28 @@ public class WalkNode : Node
         stats = _stats;
     }
 
+    //runs behaviour
     public override NodeStatus RunBehaviour()
     {
         //walk to target 
         agent.SetDestination(target.position);
-        //if at target return sucess
+        //if near target return sucess
         if (agent.remainingDistance < 0.3)
         {
+            //set current behaviour for UI
             stats.Speech = "Heading over there";
             stats.BT = "Walking";
             
             return NodeStatus.success;
             
         }
+        //if not at target set to running
         animator.SetTrigger("Moving");
         return NodeStatus.running;
         
     }
 
+    //changes target to walk to
     public void SetTarget(Transform _target)
     {
         target = _target;
